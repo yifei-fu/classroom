@@ -2,6 +2,8 @@ import React from 'react';
 import HomePage from './components/HomePage';
 import Dashboard from './components/Dashboard';
 import AuthView from './components/AuthView';
+import JoinCourseView from './components/JoinCourseView';
+
 import './App.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AppBar from './components/AppBar';
@@ -15,6 +17,7 @@ const App: React.FC = () => {
           <Route exact path="/signin" component={AuthView} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/join" component={JoinCourseView} />
         </div>
       </Router>
     </div>
