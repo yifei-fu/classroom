@@ -85,22 +85,22 @@ app.get('/users', (req, res) => {
 // API endpoints for User
 // ===================================================
 // Get profile of current user
-app.get('/user', (req, res) => {
+app.get('/user', urlencodedParser, (req, res) => {
     UserController.getUser(req, res, manager);
 });
 
 // Create new user
-app.post('/user/logout', (req, res) => {
+app.post('/user', urlencodedParser, (req, res) => {
     UserController.createUser(req, res, manager);
 });
 
 // User Login
-app.post('/user/login', (req, res) => {
+app.post('/user/login', urlencodedParser,  (req, res) => {
     UserController.login(req, res, manager);
 });
 
 // User Logout
-app.get('/user/logout', (req, res, next) => {
+app.get('/user/logout', urlencodedParser, (req, res, next) => {
     UserController.logout(req, res, manager);
     res.json();
 });
