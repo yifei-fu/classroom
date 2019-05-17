@@ -1,15 +1,6 @@
 import jwt from 'jsonwebtoken';
 import {API_HOST, LOCAL_TOKEN_KEY} from './constant'
-
-export interface UserSignUpRequestBody {
-    username: string;
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    isInstructor: boolean;
-    uid: string;
-}
+import { UserSignUpRequestBody } from './type';
 
 export default class Auth {
     public static isSignedIn(): boolean {
