@@ -4,14 +4,12 @@ import './AppBar.css';
 
 const AppBar: React.FC = () => {
     return (
-        <Navbar bg="dark" variant="dark" className="AppBar">
-            <Navbar.Brand href="#home">
+        <Navbar bg='dark' variant='dark' className='AppBar'>
+            <Navbar.Brand href='/'>
                 {'InQuizitive'}
             </Navbar.Brand>
         </Navbar>
     );
-}
+};
 
 export default AppBar;
-
-

@@ -1,0 +1,19 @@
+.dashboard{
+    max-width: 1024px;
+    width: 75vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.courses-container{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.course-card {
+    width: 300px;
+    margin: 10px;
+}
