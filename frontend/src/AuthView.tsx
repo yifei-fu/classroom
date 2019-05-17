@@ -1,10 +1,11 @@
 import React from 'react';
+import {Card, Button} from 'react-bootstrap';
 
 const AuthView: React.FC = () => {
     return (
-        <div className="root">
+        <Card style={{ width: '500px' }}>
             Sign in or Sign up
-        </div>
+        </Card>
     );
 }
 
