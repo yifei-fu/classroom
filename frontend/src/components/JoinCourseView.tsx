@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Form, Button } from 'react-bootstrap';
 
-var stuff: string | undefined;
+var joinSecret: string | undefined;
 
 function JoinCourseView({ match }: { match: any }) {
     const id = match.params.id;
@@ -10,16 +10,16 @@ function JoinCourseView({ match }: { match: any }) {
 
     return (
         <div>
-            <h1>Course title: TBD </h1>
+            <h1>Course title: COM SCI 130: Software Engineering </h1>
             <h2>Course id: {id}</h2>
             <br></br>
             <br></br>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="joinClassSecret" >
                     <Form.Label style={{ justifyContent: "left" }}>Class code</Form.Label>
-                    <Form.Control type="text" value={stuff} placeholder="Code" onChange={handleChange}/>
+                    <Form.Control type="text" placeholder="Code" value = {joinSecret} />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" value="Submit">
                     Join class
                 </Button>
             </Form>          
@@ -27,11 +27,8 @@ function JoinCourseView({ match }: { match: any }) {
     );
 }
 
-function handleChange(event: any) {
-
-}
-
 function handleSubmit(event: any) {
+    joinSecret = event.target.value;
     event.preventDefault();
     console.log(event);
     alert('This feature isn\'t enabled yet, but stay tuned!');
