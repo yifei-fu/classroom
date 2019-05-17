@@ -10,4 +10,8 @@ export class UserProfileController {
             res.json(docs);
         });
     }
+
+    public static createUserProfiles(user) {
+        console.log("Create UserProfile")
+    }
 }
