@@ -10,13 +10,14 @@ export class UserController {
             username: username,
             password: password
         };
-        mgr.findOne(User, query).then(doc => {
-            if (doc != null) {
+        // console.log(query)
+        mgr.findOne(User, {username: username, password: password}).then(doc => {
+            // console.log(doc)
+            if (doc) {
                 /*TODO: Set browser cookie with JWT*/
-                res.send('Authenticated')
-                console.log()
+                res.send(200, 'Authenticated')
             } else {
-                res.send('Authentication failed')
+                res.send(400, 'Authentication failed')
             }
         });
     }
@@ -38,26 +39,29 @@ export class UserController {
         /* TODO: Validate fields */
 
         // Check whether user exists
-        let user = this.userExist(username, mgr);
-        if (user != null) {
-            res.send(400, 'User already exists');
-        }
+        mgr.findOne(User, {username: username})
+        .then((doc)=>{
+            console.log(doc)
+            if (!doc) {
+                let newUser = new User();
+                newUser.username= username
+                newUser.firstName= firstname
+                newUser.lastName= lastname
+                newUser.email= email
+                newUser.password= password
+                newUser.isInstructor= isInstructor
+                newUser.uid= uid
 
-        let newUser = {
-            username: username,
-            firstname: firstname,
-            lastname: lastname,
-            email: email,
-            password: password,
-            isInstructor: isInstructor,
-            uid: uid
-        };
+                mgr.save(newUser)
+                .then(console.log('User created'))
+                .catch(err => {console.log(err)});
+        
+                res.send(200, 'successful operation');
+            } else {
+                res.send(400, 'User already exists');
+            }
+        });
 
-        mgr.InserOne(User, newUser)
-        .then(console.log('User created'))
-        .catch(err => {console.log(err)});
-
-        res.send(200, 'successful operation');
         /* TODO: When user is created, a user profile should be created as well 
         Call creatUserProfile()        
         */
@@ -68,7 +72,7 @@ export class UserController {
         // Identify user with jwt
         let username = "user"
 
-        mgr.FindOne(User, {username: username})
+        mgr.findOne(User, {username: username})
         .then(doc => {
             console.log('Obtained User');
             res.send();
@@ -79,8 +83,9 @@ export class UserController {
     }
 
     private static userExist(username: string, mgr){
-        mgr.FindOne(User, {username: username})
+        mgr.findOne(User, {username: username})
         .then((doc)=>{
+            console.log(doc)
             if (doc == null)
                 return false
             return true
