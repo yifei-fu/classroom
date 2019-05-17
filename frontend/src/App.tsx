@@ -17,7 +17,7 @@ const App: React.FC = () => {
           <Route exact path="/signin" component={AuthView} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/join" component={JoinCourseView} />
+          <Route path="/course/:id/enroll" component={JoinCourseView}/>
         </div>
       </Router>
     </div>

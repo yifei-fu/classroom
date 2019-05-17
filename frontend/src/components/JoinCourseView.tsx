@@ -1,12 +1,19 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const JoinCourseView: React.FC = () => {
+function JoinCourseView({ match }: { match: any }) {
+    const id = match.params.id;
+
+    // get course name from server using
+
     return (
-        <div>
-            
-        </div>
+    <div>
+        <h1>Course title: TBD </h1>
+        
+        <h2>Course id: {id}</h2>
+    </div>
     );
 }
+
 
 export default JoinCourseView;
