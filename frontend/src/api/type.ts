@@ -33,8 +33,8 @@ export interface CourseUsers {
 export type Role = 'student' | 'instructor' | 'TA';
 
 export interface CourseInfo {
-    course: Course
-    role: Role
+    course: Course;
+    role: Role;
 }
 
 export interface CreateCourseRequestBody {

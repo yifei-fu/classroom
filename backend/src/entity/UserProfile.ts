@@ -1,20 +1,20 @@
-import {Entity, PrimaryGeneratedColumn, Column, ObjectID, ObjectIdColumn} from "typeorm";
+import {Column, Entity, ObjectID, ObjectIdColumn, PrimaryGeneratedColumn} from 'typeorm';
 
 @Entity()
 export class UserProfile {
 
     @ObjectIdColumn()
-    id: ObjectID;
+    public id: ObjectID;
 
     @Column()
-    username: string;
+    public username: string;
 
     @Column()
-    firstName: string;
+    public firstName: string;
 
     @Column()
-    lastName: string;
+    public lastName: string;
 
     @Column()
-    isInstructor: boolean
+    public isInstructor: boolean;
 }

@@ -5,7 +5,7 @@ import {Course, CourseInfo} from '../api/type';
 
 import './Dashboard.css';
 
-function renderCourseCard(course: Course, index: number): React.ReactNode {
+function renderCourseCard({course, role}: CourseInfo, index: number): React.ReactNode {
     return (
         <Card className='course-card shadow-sm p-3 mb-5 bg-white rounded' key={index}>
             <Card.Body>
@@ -24,7 +24,7 @@ function renderCourseCard(course: Course, index: number): React.ReactNode {
 }
 
 const Dashboard: React.FC = () => {
-    const [coursesInfo, setCoursesInfo] = useState<Course[]>([]);
+    const [coursesInfo, setCoursesInfo] = useState<CourseInfo[]>([]);
     useEffect(() => {
         APIManager.getEnrolledCoursesInfo().then((data) => {
             setCoursesInfo(data);

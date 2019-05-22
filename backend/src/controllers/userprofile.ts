@@ -1,17 +1,17 @@
-import {getMongoManager} from "typeorm"
-import {UserProfile} from '../entity/UserProfile'
+import {getMongoManager} from 'typeorm';
+import {UserProfile} from '../entity/UserProfile';
 
 // UserProfile Controller Class
 export class UserProfileController {
     public static getUserProfiles(req, res, mgr) {
         mgr.find(UserProfile)
-        .then(docs => {
-            console.log(docs)
+        .then((docs) => {
+            console.log(docs);
             res.json(docs);
         });
     }
 
     public static createUserProfiles(user) {
-        console.log("Create UserProfile")
+        console.log('Create UserProfile');
     }
 }

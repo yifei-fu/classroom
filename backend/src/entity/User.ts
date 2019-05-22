@@ -1,29 +1,29 @@
-import {Entity, PrimaryGeneratedColumn, Column, ObjectID, ObjectIdColumn} from "typeorm";
+import {Column, Entity, ObjectID, ObjectIdColumn, PrimaryGeneratedColumn} from 'typeorm';
 
 @Entity()
 export class User {
 
     @ObjectIdColumn()
-    id: ObjectID;
+    public id: ObjectID;
 
     @Column()
-    username: string;
+    public username: string;
 
     @Column()
-    password: string;
+    public password: string;
 
     @Column()
-    firstName: string;
+    public firstName: string;
 
     @Column()
-    lastName: string;
+    public lastName: string;
 
     @Column()
-    email: string;
+    public email: string;
 
     @Column()
-    isInstructor: boolean
+    public isInstructor: boolean;
 
     @Column()
-    uid: string
+    public uid: string;
 }
