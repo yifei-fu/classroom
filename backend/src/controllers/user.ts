@@ -1,16 +1,16 @@
-import {getMongoManager} from 'typeorm';
+import {getMongoManager, MongoEntityManager} from 'typeorm';
 import {User} from '../entity/User';
 
 // User Controller Class
 export class UserController {
-    public static login(req, res, mgr) {
+    public static login(req, res) {
         const username = req.body.username;
         const password = req.body.password;
         const query = {
             username,
             password,
         };
-        mgr.findOne(User, query).then((doc) => {
+        getMongoManager().findOne(User, query).then((doc) => {
             if (doc != null) {
                 /*TODO: Set browser cookie with JWT*/
                 res.send('Authenticated');
@@ -21,12 +21,12 @@ export class UserController {
         });
     }
 
-    public static logout(req, res, mgr) {
+    public static logout(req, res) {
         /*TODO: Clear cookie with JWT*/
         res.send();
     }
 
-    public static createUser(req, res, mgr) {
+    public static createUser(req, res) {
         const username = req.body.username;
         const firstname = req.body.firstname;
         const lastname = req.body.lastname;
@@ -38,7 +38,7 @@ export class UserController {
         /* TODO: Validate fields */
 
         // Check whether user exists
-        const user = this.userExist(username, mgr);
+        const user = this.userExist(username);
         if (user != null) {
             res.send(400, 'User already exists');
         }
@@ -53,8 +53,8 @@ export class UserController {
             uid,
         };
 
-        mgr.InserOne(User, newUser)
-        .then(console.log('User created'))
+        getMongoManager().insertOne(User, newUser)
+        .then(() => console.log('User created'))
         .catch((err) => {console.log(err); });
 
         res.send(200, 'successful operation');
@@ -63,12 +63,12 @@ export class UserController {
         */
     }
 
-    public static getUser(req, res, mgr) {
+    public static getUser(req, res) {
         /* TODO: Implement jwt */
         // Identify user with jwt
         const username = 'user';
 
-        mgr.FindOne(User, {username})
+        getMongoManager().findOne(User, {username})
         .then((doc) => {
             console.log('Obtained User');
             res.send();
@@ -78,8 +78,8 @@ export class UserController {
         });
     }
 
-    private static userExist(username: string, mgr) {
-        mgr.FindOne(User, {username})
+    private static userExist(username: string) {
+        getMongoManager().findOne(User, {username})
         .then((doc) => {
             if (doc == null) {
                 return false;
