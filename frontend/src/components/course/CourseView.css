@@ -1,0 +1,18 @@
+.tabs-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.tab {
+    border-radius: 19px;
+    margin-left: 40px;
+    margin-right: 40px;
+    width: 100px;
+
+}
+
+.tab-active {
+    background: #cab7ef;
+    color: black;
+}

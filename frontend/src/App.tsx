@@ -4,21 +4,28 @@ import Dashboard from './components/Dashboard';
 import HomePage from './components/HomePage';
 import JoinCourseView from './components/JoinCourseView';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Route, RouteComponentProps, Switch} from 'react-router-dom';
 import './App.css';
 import AppBar from './components/AppBar';
+import CourseView from './components/course/CourseView';
 
 const App: React.FC = () => {
   return (
     <div className='App'>
       <AppBar/>
       <Router>
-        <div>
+        <Switch>
           <Route exact path='/signin' component={AuthView} />
           <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/' component={HomePage} />
-          <Route path='/course/:id/enroll' component={JoinCourseView}/>
-        </div>
+          <Route path='/course/:courseID' render={({match}: RouteComponentProps) => {
+            return (
+              <CourseView id={(match.params as {courseID: string}).courseID}/>
+            );
+          }}/>
+          <Route path='/enroll/:id' component={JoinCourseView}/>
+          <Route component={HomePage} />
+        </Switch>
       </Router>
     </div>
   );
