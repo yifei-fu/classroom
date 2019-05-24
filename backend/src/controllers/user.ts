@@ -76,6 +76,7 @@ export class UserController {
     private static userExist(username: string){
         getMongoManager().findOne(User, {username: username})
         .then((doc)=>{
+            console.log(doc)
             if (doc == null)
                 return false
             return true
