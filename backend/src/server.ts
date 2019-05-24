@@ -83,16 +83,16 @@ app.get('/users', UserProfileController.getUserProfiles);
 // API endpoints for User
 // ===================================================
 // Get profile of current user
-app.get('/user', UserController.getUser);
+app.get('/user', urlencodedParser, UserController.getUser);
 
 // Create new user
-app.post('/user/logout', UserController.createUser);
+app.post('/user/logout', urlencodedParser, UserController.createUser);
 
 // User Login
-app.post('/user/login', UserController.login);
+app.post('/user/login', urlencodedParser, UserController.login);
 
 // User Logout
-app.get('/user/logout', UserController.logout);
+app.get('/user/logout', urlencodedParser, UserController.logout);
 
 // ===================================================
 // API endpoints for courses
