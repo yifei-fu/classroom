@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import {API_HOST, LOCAL_TOKEN_KEY} from './constant'
+import {API_HOST, LOCAL_TOKEN_KEY} from './constant';
 import { UserSignUpRequestBody } from './type';
 
 export default class Auth {

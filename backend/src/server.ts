@@ -77,61 +77,39 @@ app.get('/healthcheck', (req, res) => {
 // API endpoints for UserProfile
 // ===================================================
 // Return all userprofiles
-app.get('/users', (req, res) => {
-    UserProfileController.getUserProfiles(req, res)
-});
+app.get('/users', UserProfileController.getUserProfiles);
 
 // ===================================================
 // API endpoints for User
 // ===================================================
 // Get profile of current user
-app.get('/user', urlencodedParser, (req, res) => {
-    UserController.getUser(req, res)
-});
+app.get('/user', UserController.getUser);
 
 // Create new user
-app.post('/user', urlencodedParser, (req, res) => {
-    UserController.createUser(req, res)
-});
+app.post('/user/logout', UserController.createUser);
 
 // User Login
-app.post('/user/login', urlencodedParser,  (req, res) => {
-    UserController.login(req, res)
-});
+app.post('/user/login', UserController.login);
 
 // User Logout
-app.get('/user/logout', urlencodedParser, (req, res, next) => {
-    UserController.logout(req, res)
-    res.json()
-});
+app.get('/user/logout', UserController.logout);
 
 // ===================================================
 // API endpoints for courses
 // ===================================================
-app.get('/courses', (req, res) => {
-    CourseController.listCourses(req, res)
-});
+app.get('/courses', CourseController.listCourses);
 
 // Get Course by name
-app.get('/course', urlencodedParser, (req, res) => {
-    console.log(req.body);
-    CourseController.getCourse(req, res)
-});
+app.get('/course', urlencodedParser, CourseController.getCourse);
 
 // Creat Course
-app.post('/course', urlencodedParser, (req, res) => {
-    CourseController.createCourse(req, res)
-});
+app.post('/course', urlencodedParser, CourseController.createCourse);
 
 // Get User enrolled in a course
-app.get('/course/users', urlencodedParser, (req, res) => {
-    CourseController.getProfiles(req, res)
-});
+app.get('/course/users', urlencodedParser, CourseController.getProfiles);
 
 // Enroll a user in a course
-app.put('/course/enroll', urlencodedParser, (req, res) => {
-    CourseController.enrollCourse(req, res)
-});
+app.put('/course/enroll', urlencodedParser, CourseController.enrollCourse);
 
 // start Express app
 app.listen(port, () => {

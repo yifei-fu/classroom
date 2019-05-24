@@ -1,27 +1,34 @@
 import React from 'react';
-import HomePage from './components/HomePage';
-import Dashboard from './components/Dashboard';
 import AuthView from './components/AuthView';
+import Dashboard from './components/Dashboard';
+import HomePage from './components/HomePage';
 import JoinCourseView from './components/JoinCourseView';
 
+import {BrowserRouter as Router, Route, RouteComponentProps, Switch} from 'react-router-dom';
 import './App.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import AppBar from './components/AppBar';
+import CourseView from './components/course/CourseView';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <div className='App'>
       <AppBar/>
       <Router>
-        <div>
-          <Route exact path="/signin" component={AuthView} />
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/" component={HomePage} />
-          <Route path="/course/:id/enroll" component={JoinCourseView}/>
-        </div>
+        <Switch>
+          <Route exact path='/signin' component={AuthView} />
+          <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/' component={HomePage} />
+          <Route path='/course/:courseID' render={({match}: RouteComponentProps) => {
+            return (
+              <CourseView id={(match.params as {courseID: string}).courseID}/>
+            );
+          }}/>
+          <Route path='/enroll/:id' component={JoinCourseView}/>
+          <Route component={HomePage} />
+        </Switch>
       </Router>
     </div>
   );
-}
+};
 
 export default App;

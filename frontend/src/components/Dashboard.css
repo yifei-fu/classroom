@@ -1,0 +1,17 @@
+.dashboard{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.course {
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+    align-items: center;
+}
+
+.course-text {
+    width: 70%;
+}

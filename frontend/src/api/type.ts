@@ -30,12 +30,7 @@ export interface CourseUsers {
     TAs: Course[];
 }
 
-export type Role = 'student' | 'instructor' | 'TA';
-
-export interface CourseInfo {
-    course: Course
-    role: Role
-}
+export type Role = 'student' | 'instructor' | 'TA' | null;
 
 export interface CreateCourseRequestBody {
     name?: string;

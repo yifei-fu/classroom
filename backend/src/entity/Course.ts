@@ -1,27 +1,27 @@
-import {Entity, PrimaryGeneratedColumn, Column, ObjectID, ObjectIdColumn} from "typeorm";
-import { UserProfile } from "./UserProfile";
+import {Column, Entity, ObjectID, ObjectIdColumn, PrimaryGeneratedColumn} from 'typeorm';
+import { UserProfile } from './UserProfile';
 
 @Entity()
 export class Course {
 
     @ObjectIdColumn()
-    id: ObjectID;
+    public id: ObjectID;
 
     @Column()
-    name: string;
+    public name: string;
 
     @Column()
-    school: string;
+    public school: string;
 
     @Column()
-    term: string;
+    public term: string;
 
-    @Column(type=>UserProfile)
-    instructor: UserProfile;
-
-    @Column()
-    studentJoinSecret: string
+    @Column((type) => UserProfile)
+    public instructor: UserProfile;
 
     @Column()
-    TAJoinSecret: string
+    public studentJoinSecret: string;
+
+    @Column()
+    public TAJoinSecret: string;
 }

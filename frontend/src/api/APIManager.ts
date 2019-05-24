@@ -1,6 +1,6 @@
 import Auth from './Auth';
 import { API_HOST } from './constant';
-import { Course, CourseInfo, CourseUsers, CreateCourseRequestBody, EnrollCourseRequestBody } from './type';
+import { Course, CourseUsers, CreateCourseRequestBody, EnrollCourseRequestBody } from './type';
 
 export default class APIManager {
     public static createCourse(body: CreateCourseRequestBody): Promise<Course> {
@@ -20,7 +20,7 @@ export default class APIManager {
         });
     }
 
-    public static getCourseInfo(id: string): Promise<CourseInfo> {
+    public static getCourse(id: string): Promise<Course> {
         const headers: any = {
             'Content-Type': 'application/json',
         };
@@ -32,13 +32,13 @@ export default class APIManager {
             headers,
         }).then((response) => {
             if (response.ok) {
-                return response.json() as Promise<CourseInfo>;
+                return response.json() as Promise<Course>;
             }
             throw new Error('Failed to get course info');
         });
     }
 
-    public static getEnrolledCoursesInfo(): Promise<CourseInfo[]> {
+    public static getEnrolledCourses(): Promise<Course[]> {
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `jwt ${Auth.getToken()}`,
@@ -49,7 +49,7 @@ export default class APIManager {
             headers,
         }).then((response) => {
             if (response.ok) {
-                return response.json() as Promise<CourseInfo[]>;
+                return response.json() as Promise<Course[]>;
             }
             throw new Error('Failed to get enrolled courses');
         });

@@ -1,6 +1,16 @@
 .root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 1200px;
   margin: auto;
-  width: 50%;
-  border: 3px solid royalblue;
-  padding: 50px;
+  margin-top: 50px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
