@@ -4,6 +4,7 @@ import {Card, Col, Container, ListGroup, Row} from 'react-bootstrap';
 import {RouteComponentProps, withRouter } from 'react-router';
 import APIManager from '../api/APIManager';
 import {Course} from '../api/type';
+import Avatar from './Avatar';
 import CardContainer from './CardContainer';
 import './Dashboard.css';
 
@@ -13,15 +14,11 @@ function renderCourse(history: History, course: Course, index: number): React.Re
         action
         className='course'
         onClick={() => history.push(`/course/${course.id}`)}>
-        <Card.Text>
-          {course.name}
-          <br/>
-          School: {course.school}
-          <br/>
-          Term: {course.term}
-          <br/>
-          Instructor: {course.instructor.firstName} {course.instructor.lastName}
-        </Card.Text>
+          <Avatar text={(course.name.match(/^[a-zA-Z]+/) || [course.name])[0]}/>
+            <div className='course-text'>
+              <h5>{course.name}</h5>
+              <div>{course.school} {course.term} by {course.instructor.firstName} {course.instructor.lastName}</div>
+            </div>
       </ListGroup.Item>
     );
 }
