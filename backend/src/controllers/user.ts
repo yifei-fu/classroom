@@ -3,7 +3,7 @@ import {User} from '../entity/User'
 
 // User Controller Class
 export class UserController {
-    public static login(req, res, mgr) {
+    public static login(req, res) {
         let username = req.body.username;
         let password = req.body.password;
         let query = {
@@ -11,7 +11,7 @@ export class UserController {
             password: password
         };
         // console.log(query)
-        mgr.findOne(User, {username: username, password: password}).then(doc => {
+        getMongoManager().findOne(User, query).then(doc => {
             // console.log(doc)
             if (doc) {
                 /*TODO: Set browser cookie with JWT*/
@@ -22,12 +22,12 @@ export class UserController {
         });
     }
 
-    public static logout(req, res, mgr) {
+    public static logout(req, res) {
         /*TODO: Clear cookie with JWT*/
         res.send()
     }
 
-    public static createUser(req, res, mgr) {
+    public static createUser(req, res) {
         let username = req.body.username
         let firstname = req.body.firstname
         let lastname = req.body.lastname
@@ -39,7 +39,7 @@ export class UserController {
         /* TODO: Validate fields */
 
         // Check whether user exists
-        mgr.findOne(User, {username: username})
+        getMongoManager().findOne(User, {username: username})
         .then((doc)=>{
             console.log(doc)
             if (!doc) {
@@ -52,8 +52,8 @@ export class UserController {
                 newUser.isInstructor= isInstructor
                 newUser.uid= uid
 
-                mgr.save(newUser)
-                .then(console.log('User created'))
+                getMongoManager().save(newUser)
+                .then( () => console.log('User created'))
                 .catch(err => {console.log(err)});
         
                 res.send(200, 'successful operation');
@@ -67,12 +67,12 @@ export class UserController {
         */
     }
  
-    public static getUser(req, res, mgr) {
+    public static getUser(req, res) {
         /* TODO: Implement jwt */
         // Identify user with jwt
         let username = "user"
 
-        mgr.findOne(User, {username: username})
+        getMongoManager().findOne(User, {username: username})
         .then(doc => {
             console.log('Obtained User');
             res.send();
@@ -82,8 +82,8 @@ export class UserController {
         });
     }
 
-    private static userExist(username: string, mgr){
-        mgr.findOne(User, {username: username})
+    private static userExist(username: string){
+        getMongoManager().findOne(User, {username: username})
         .then((doc)=>{
             console.log(doc)
             if (doc == null)
