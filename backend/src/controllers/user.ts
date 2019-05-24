@@ -1,4 +1,4 @@
-import {getMongoManager, MongoEntityManager} from 'typeorm';
+import {getMongoManager, MongoEntityManager, TreeLevelColumn} from 'typeorm';
 import {User} from '../entity/User';
 
 // User Controller Class
@@ -27,29 +27,31 @@ export class UserController {
         /* TODO: Validate fields */
 
         // Check whether user exists
-        const user = this.userExist(username);
-        if (user != null) {
-            res.send(400, 'User already exists');
-        }
+        getMongoManager().findOne(User, {username})
+        .then((doc) => {
+            if (!doc) {
+                const newUser = {
+                    username,
+                    firstname,
+                    lastname,
+                    email,
+                    password,
+                    isInstructor,
+                    uid,
+                };
 
-        const newUser = {
-            username,
-            firstname,
-            lastname,
-            email,
-            password,
-            isInstructor,
-            uid,
-        };
+                getMongoManager().insertOne(User, newUser)
+                .then(() => console.log('User created'))
+                .catch((err) => {console.log(err); });
 
-        getMongoManager().insertOne(User, newUser)
-        .then(() => console.log('User created'))
-        .catch((err) => {console.log(err); });
-
-        res.send(200, 'successful operation');
-        /* TODO: When user is created, a user profile should be created as well
-        Call creatUserProfile()
-        */
+                res.send(200, 'Successful operation');
+                /* TODO: When user is created, a user profile should be created as well
+                Call creatUserProfile()
+                */
+            } else {
+                res.send(400, 'User already exists');
+            }
+        });
     }
 
     public static getUser(req, res) {
@@ -64,16 +66,6 @@ export class UserController {
         })
         .catch((err) => {
             console.log(err);
-        });
-    }
-
-    private static userExist(username: string) {
-        getMongoManager().findOne(User, {username})
-        .then((doc) => {
-            if (doc == null) {
-                return false;
-            }
-            return true;
         });
     }
 }
