@@ -1,17 +1,32 @@
 import {getMongoManager, MongoEntityManager, TreeLevelColumn} from 'typeorm';
+import {Config} from '../config';
 import {User} from '../entity/User';
+import * as jwt from 'jwt-simple';
+import * as auth from './auth';
+
+const config: Config = require('../config.json')
 
 // User Controller Class
 export class UserController {
     public static login(req, res) {
         const {username, password} = req.body;
-
+        if (!username && !password) {
+            res.send(404, 'No valid credentials found')
+        }
         getMongoManager().findOne(User, {username, password}).then((doc) => {
             if (doc) {
-                /*TODO: Set browser cookie with JWT*/
-                res.send(200, 'Authenticated')
+                console.log('Found User')
+
+                // Return jwt token
+                const payload = {
+                    uid: doc.uid
+                };
+                const token = jwt.encode(payload, config.jwtSecret)
+                res.json({
+                    token: token
+                });
             } else {
-                res.send(400, 'Authentication failed')
+                res.json({'detail': 'Authentcation failed'});
             }
         });
     }
@@ -67,5 +82,9 @@ export class UserController {
         .catch((err) => {
             console.log(err);
         });
+    }
+
+    public static async getUserByUID(uid: string) {
+        return await getMongoManager().findOne(User, {uid});
     }
 }
