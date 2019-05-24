@@ -86,7 +86,7 @@ app.get('/users', UserProfileController.getUserProfiles);
 app.get('/user', urlencodedParser, UserController.getUser);
 
 // Create new user
-app.post('/user/logout', urlencodedParser, UserController.createUser);
+app.post('/user', urlencodedParser, UserController.createUser);
 
 // User Login
 app.post('/user/login', urlencodedParser, UserController.login);
