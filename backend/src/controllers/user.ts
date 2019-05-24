@@ -4,15 +4,13 @@ import {User} from '../entity/User'
 // User Controller Class
 export class UserController {
     public static login(req, res) {
-        let username = req.body.username;
-        let password = req.body.password;
+        const {username, password} = req.body;
         let query = {
             username: username,
             password: password
         };
-        // console.log(query)
-        getMongoManager().findOne(User, query).then(doc => {
-            // console.log(doc)
+
+        getMongoManager().findOne(User, query).then((doc) => {
             if (doc) {
                 /*TODO: Set browser cookie with JWT*/
                 res.send(200, 'Authenticated')
@@ -28,14 +26,7 @@ export class UserController {
     }
 
     public static createUser(req, res) {
-        let username = req.body.username
-        let firstname = req.body.firstname
-        let lastname = req.body.lastname
-        let email = req.body.email
-        let password = req.body.password
-        let isInstructor = req.body.isInstructor
-        let uid = req.body.uid
-
+        const {username, firstname, lastname, email, password, isInstructor, uid} = req.body
         /* TODO: Validate fields */
 
         // Check whether user exists
@@ -54,7 +45,7 @@ export class UserController {
 
                 getMongoManager().save(newUser)
                 .then( () => console.log('User created'))
-                .catch(err => {console.log(err)});
+                .catch((err) => {console.log(err)});
         
                 res.send(200, 'successful operation');
             } else {
@@ -73,11 +64,11 @@ export class UserController {
         let username = "user"
 
         getMongoManager().findOne(User, {username: username})
-        .then(doc => {
+        .then((doc) => {
             console.log('Obtained User');
             res.send();
         })
-        .catch(err => {
+        .catch((err) => {
             console.log(err)
         });
     }
@@ -85,7 +76,6 @@ export class UserController {
     private static userExist(username: string){
         getMongoManager().findOne(User, {username: username})
         .then((doc)=>{
-            console.log(doc)
             if (doc == null)
                 return false
             return true
