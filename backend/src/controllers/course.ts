@@ -3,23 +3,23 @@ import {Course} from '../entity/Course'
 
 // Course Controller Class
 export class CourseController {
-    public static getCourse(req, res, mgr) {
+    public static getCourse(req, res) {
         let name = req.query.name
 
-        mgr.findOne(Course, {name: name})
+        getMongoManager().findOne(Course, {name: name})
         .then(doc => {
             res.json(doc);
         });
     }
     
-    public static listCourses(req, res, mgr) {
-        mgr.find(Course)
+    public static listCourses(req, res) {
+        getMongoManager().find(Course)
         .then(docs => {
             res.json(docs);
         });
     }
 
-    public static createCourse(req, res, mgr) {
+    public static createCourse(req, res) {
         let name = req.body.name;
         let school = req.body.school;
         let term = req.body.term;
@@ -30,19 +30,19 @@ export class CourseController {
             term: term
         };
 
-        mgr.InsertOne(Course, course)
+        getMongoManager().insertOne(Course, course)
         .then(() => {console.log("Course created")})
         .catch(err => {console.log(err)});
     }
 
-    public static enrollCourse(req, res, mgr) {
+    public static enrollCourse(req, res) {
         let secret = req.body.joinSecret
     }
 
-    public static getProfiles(req, res, mgr) {
+    public static getProfiles(req, res) {
         let coursename = req.query.class
 
-        mgr.find(Course, {name: coursename})
+        getMongoManager().find(Course, {name: coursename})
         .then(doc => {
             res.json(doc);
         });
