@@ -1,4 +1,5 @@
-# Classroom
+# InQuizitive
+Free online quiz platform and discussion forum for school courses.
 CS 130 Project.
 
 ## Getting Started
@@ -24,6 +25,8 @@ npm run dev
 cd frontend
 npm start
 ```
+
+## [API Documentation](https://app.swaggerhub.com/apis-docs/yifei-fu/InQuizitive/1.0.0-oas3)
 
 ## [Timeline and Tasks](https://docs.google.com/document/d/13QpObOzFn0rKsbBrVQOv_873EKAa_8NI9OvTfaztwQE/edit?usp=sharing)
 ## [SRS](https://docs.google.com/document/d/1ZrXsY_le5oime8KeewqWVokLBwkKAcA4H4CdF8Wg2PU/edit?usp=sharing)
