@@ -5,12 +5,8 @@ import {User} from '../entity/User';
 export class UserController {
     public static login(req, res) {
         const {username, password} = req.body;
-        const query = {
-            username: username,
-            password: password
-        };
 
-        getMongoManager().findOne(User, query).then((doc) => {
+        getMongoManager().findOne(User, {username, password}).then((doc) => {
             if (doc) {
                 /*TODO: Set browser cookie with JWT*/
                 res.send(200, 'Authenticated')
