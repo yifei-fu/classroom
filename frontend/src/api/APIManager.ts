@@ -1,6 +1,7 @@
 import Auth from './Auth';
 import { API_HOST } from './constant';
-import { Course, CourseUsers, CreateCourseRequestBody, EnrollCourseRequestBody } from './type';
+import {sampleCourseDetails} from './mock';
+import {Course, CourseDetails, CourseUsers, CreateCourseRequestBody, EnrollCourseRequestBody} from './type';
 
 export default class APIManager {
     public static createCourse(body: CreateCourseRequestBody): Promise<Course> {
@@ -33,6 +34,28 @@ export default class APIManager {
         }).then((response) => {
             if (response.ok) {
                 return response.json() as Promise<Course>;
+            }
+            throw new Error('Failed to get course info');
+        });
+    }
+
+    public static getCourseDetails(id: string): Promise<CourseDetails> {
+        const headers: any = {
+            'Content-Type': 'application/json',
+        };
+        if (Auth.isSignedIn()) {
+            headers.Authorization = `jwt ${Auth.getToken()}`;
+        }
+        // todo: backend course details endpoint
+        return new Promise<CourseDetails>((resolve, reject) => {
+            resolve(sampleCourseDetails);
+        });
+        return fetch(`${API_HOST}/course/${id}/details`, {
+            method: 'GET',
+            headers,
+        }).then((response) => {
+            if (response.ok) {
+                return response.json() as Promise<CourseDetails>;
             }
             throw new Error('Failed to get course info');
         });
