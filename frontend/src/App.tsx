@@ -9,6 +9,12 @@ import './App.css';
 import AppBar from './components/AppBar';
 import CourseView from './components/course/CourseView';
 
+// Font Awesome icons
+import { library } from '@fortawesome/fontawesome-svg-core';
+import * as icons from '@fortawesome/free-solid-svg-icons';
+
+[icons.faChevronDown, icons.faChevronUp, icons.faUser, icons.faClock, icons.faPlus, icons.faTags].forEach((icon) => library.add(icon));
+
 const App: React.FC = () => {
   return (
     <div className='App'>
