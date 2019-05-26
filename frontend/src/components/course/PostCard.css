@@ -1,0 +1,32 @@
+.post-card {
+    transition: height 0.3s ease-in-out;
+    height: 200px;
+}
+
+.expanded {
+    height: 80vh;
+}
+
+.post-body {
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.post-body::-webkit-scrollbar {
+    display: none;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.post-comment {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 20px;
+}
+
+.post-comment-text {
+    text-align: left;
+}
