@@ -1,9 +1,8 @@
 .card-container {
     border-radius: 20px;
-    min-height: 60vh;
     overflow-y: auto;
 }
 
 .card-title {
-    font-weight: 300;
+    font-weight: 400;
 }

@@ -1,15 +1,13 @@
 .tabs-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .tab {
     border-radius: 19px;
-    margin-left: 40px;
-    margin-right: 40px;
     width: 100px;
-
+    margin-bottom: 10px;
 }
 
 .tab-active {

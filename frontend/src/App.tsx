@@ -13,7 +13,7 @@ import CourseView from './components/course/CourseView';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import * as icons from '@fortawesome/free-solid-svg-icons';
 
-[icons.faChevronDown, icons.faChevronUp, icons.faUser, icons.faClock, icons.faPlus, icons.faTags].forEach((icon) => library.add(icon));
+[icons.faChevronDown, icons.faChevronUp, icons.faUser, icons.faClock, icons.faPlus, icons.faTags, icons.faHourglass].forEach((icon) => library.add(icon));
 
 const App: React.FC = () => {
   return (

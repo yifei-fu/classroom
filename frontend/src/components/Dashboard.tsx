@@ -6,6 +6,8 @@ import APIManager from '../api/APIManager';
 import {Course} from '../api/type';
 import Avatar from './Avatar';
 import CardContainer from './CardContainer';
+
+import '../common.css';
 import './Dashboard.css';
 
 function renderCourse(history: History, course: Course, index: number): React.ReactNode {

@@ -3,16 +3,15 @@ import {Card} from 'react-bootstrap';
 import './CardContainer.css';
 
 export interface Props {
-    title: string;
+    title?: string;
     children: React.ReactNode;
 }
 
 const CardContainer: React.FC<Props> = (props: Props) => {
-    const {title, children} = props;
     return (
-        <Card className='card-container shadow p-3 mb-5 bg-white'>
-            <h2 className='card-title'>{title}</h2>
-            {children}
+        <Card className='card-container shadow p-3 mb-4 bg-white'>
+            {props.title && <h2 className='card-title'>{props.title}</h2>}
+            {props.children}
         </Card>
     );
 };

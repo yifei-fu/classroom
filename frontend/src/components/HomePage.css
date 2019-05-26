@@ -8,7 +8,7 @@
     50%{background-position:100% 88%}
     100%{background-position:0% 13%}
 }
-@keyframes BackgroundAnimation { 
+@keyframes BackgroundAnimation {
     0%{background-position:0% 13%}
     50%{background-position:100% 88%}
     100%{background-position:0% 13%}
@@ -31,8 +31,4 @@
     -moz-animation: BackgroundAnimation 30s ease infinite;
     animation: BackgroundAnimation 30s ease infinite;
 
-}
-
-.button {
-    width: 100px;
 }
