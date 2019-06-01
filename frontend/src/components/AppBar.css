@@ -1,7 +1,7 @@
 .AppBar {
     position: sticky;
     top: 0;
-    z-index: 999999;
+    z-index: 999;
     background-color: #a4508b;
     background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
 }

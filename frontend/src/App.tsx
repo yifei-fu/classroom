@@ -11,9 +11,14 @@ import CourseView from './components/course/CourseView';
 
 // Font Awesome icons
 import { library } from '@fortawesome/fontawesome-svg-core';
-import * as icons from '@fortawesome/free-solid-svg-icons';
+import * as regularIcons from '@fortawesome/free-regular-svg-icons';
+import * as solidIcons from '@fortawesome/free-solid-svg-icons';
 
-[icons.faChevronDown, icons.faChevronUp, icons.faUser, icons.faClock, icons.faPlus, icons.faTags, icons.faHourglass].forEach((icon) => library.add(icon));
+// react-toastify
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+library.add(solidIcons.faChevronDown, solidIcons.faChevronUp, regularIcons.faUser, regularIcons.faClock, solidIcons.faPlus, solidIcons.faTags, regularIcons.faHourglass, regularIcons.faCircle, regularIcons.faCheckCircle);
 
 const App: React.FC = () => {
   return (
@@ -33,6 +38,16 @@ const App: React.FC = () => {
           <Route component={HomePage} />
         </Switch>
       </Router>
+      <ToastContainer
+        position='top-center'
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
