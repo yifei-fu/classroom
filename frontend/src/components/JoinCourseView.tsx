@@ -1,10 +1,13 @@
 import React from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
+import APIManager from '../api/APIManager';
+import { EnrollCourseRequestBody } from '../api/type';
 
 let joinSecret: string | undefined;
+let id: string;
 
 function JoinCourseView({ match }: { match: any }) {
-    const id = match.params.id;
+    id = match.params.id;
 
     // get course name from server using
 
@@ -38,12 +41,21 @@ function handleChange(event: any) {
 }
 
 function handleSubmit(event: any) {
-    if (joinSecret == undefined) {
+    if (joinSecret == undefined || joinSecret == '  ') {
         alert('You must give a valid class key to join.');
-    } else {
-        console.log(joinSecret);
+    } else {        
+        // create the export EnrollCourseRequestBody 
+        var requestBody: EnrollCourseRequestBody = { joinSecret: joinSecret };
+
+        // carry out PUT request to see if it's the correct enrollment key
+        try {
+            APIManager.enrollCourse(id, requestBody);
+            // navigate out of here
+        }
+        catch {
+            alert('Invalid join code.');
+        }
     }
-    event.preventDefault();
 }
 
 export default JoinCourseView;
