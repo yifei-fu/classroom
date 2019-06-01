@@ -6,13 +6,15 @@ import {Post} from '../../api/type';
 import UserDisplay from '../utils/UserDisplay';
 
 import '../CardContainer.css';
+import CreateCommentModal from './CreateCommentModal';
 import './PostCard.css';
 
 export interface Props {
+  courseID: string;
   post: Post;
 }
 
-function renderComments(post: Post) {
+function renderComments(setCreateCommentModalOpen: React.Dispatch<React.SetStateAction<boolean>>, post: Post) {
   return (
     <ListGroup>
       {post.comments.map((comment, idx) => (
@@ -23,11 +25,11 @@ function renderComments(post: Post) {
           <div className='post-comment-text'>
             <div>
               <span className='mr-5 text-secondary'>
-                <FontAwesomeIcon className='mr-2' icon='clock'/>
+                <FontAwesomeIcon className='mr-2' icon={['far', 'clock']}/>
                 {moment(comment.creationTime).fromNow()}
               </span>
               <span className='text-secondary'>
-                <FontAwesomeIcon className='mr-2' icon='user'/>
+                <FontAwesomeIcon className='mr-2' icon={['far', 'user']}/>
                 <UserDisplay user={comment.author}/>
               </span>
             </div>
@@ -35,7 +37,10 @@ function renderComments(post: Post) {
           </div>
         </div>
       ))}
-      <Button className='mt-3 ml-auto mr-auto button primary-gradient'>
+      <Button
+        className='mt-3 ml-auto mr-auto button primary-gradient shadow'
+        onClick={() => setCreateCommentModalOpen(true)}
+      >
         <FontAwesomeIcon icon='plus' color='white' className='ml-1 mr-1' /> Add a comment
       </Button>
     </ListGroup>
@@ -43,8 +48,9 @@ function renderComments(post: Post) {
 }
 
 const PostCard: React.FC<Props> = (props: Props) => {
-  const {post} = props;
+  const {courseID, post} = props;
   const [expanded, setExpanded] = useState<boolean>(false);
+  const [createCommentModalOpen, setCreateCommentModalOpen] = useState<boolean>(false);
 
   return (
       <Card className={'card-container post-card mb-4 shadow' + (expanded ? ' expanded' : '')}>
@@ -56,7 +62,7 @@ const PostCard: React.FC<Props> = (props: Props) => {
             {post.content}
           </Card.Text>
           {
-            expanded && renderComments(post)
+            expanded && renderComments(setCreateCommentModalOpen, post)
           }
         </Card.Body>
         <Card.Footer className='bg-white border-0 text-secondary post-footer'>
@@ -69,17 +75,26 @@ const PostCard: React.FC<Props> = (props: Props) => {
             ))}
           </span>
           <span>
-          <FontAwesomeIcon className='mr-2' icon='clock'/>
+          <FontAwesomeIcon className='mr-2' icon={['far', 'clock']}/>
           {moment(post.creationTime).fromNow()}
           </span>
           <span>
-            <FontAwesomeIcon className='mr-2' icon='user'/>
+            <FontAwesomeIcon className='mr-2' icon={['far', 'user']}/>
             <UserDisplay user={post.author}/>
           </span>
         </Card.Footer>
         <Card.Footer className='bg-white p-2' onClick={() => setExpanded((prevState) => !prevState)}>
           <FontAwesomeIcon icon={expanded ? 'chevron-up' : 'chevron-down'}/>
         </Card.Footer>
+        {
+          createCommentModalOpen &&
+          <CreateCommentModal
+            courseID={courseID}
+            postID={post.id}
+            open={createCommentModalOpen}
+            setOpen={setCreateCommentModalOpen}
+            />
+        }
       </Card>
   );
 };
