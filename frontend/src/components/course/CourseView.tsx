@@ -88,7 +88,6 @@ const CourseView: React.FC<Props> = (props: Props) => {
           <Switch>
             {views.map(({path}: View) => (
               <Route
-                exact
                 path={path}
                 render={({history, match}: RouteComponentProps) => renderTabs(history, match, id)}
               />
@@ -98,7 +97,7 @@ const CourseView: React.FC<Props> = (props: Props) => {
           <div>
             <Switch>
               {views.map(({path, render}: View) => (
-                <Route exact path={path} render={(props) => render({...props, courseDetails})} />
+                <Route path={path} render={(props) => render({...props, courseDetails})} />
               ))}
             </Switch>
           </div>

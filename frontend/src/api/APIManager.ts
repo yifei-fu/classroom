@@ -1,7 +1,14 @@
 import Auth from './Auth';
 import { API_HOST } from './constant';
 import {sampleCourseDetails} from './mock';
-import {Course, CourseDetails, CourseUsers, CreateCourseRequestBody, EnrollCourseRequestBody} from './type';
+import {
+    Course,
+    CourseDetails,
+    CourseUsers, CreateCommentRequestBody,
+    CreateCourseRequestBody,
+    CreatePostRequestBody,
+    EnrollCourseRequestBody,
+} from './type';
 
 export default class APIManager {
     public static createCourse(body: CreateCourseRequestBody): Promise<Course> {
@@ -108,6 +115,40 @@ export default class APIManager {
                 return;
             }
             throw new Error('Failed to enroll');
+        });
+    }
+
+    public static createPost(courseID: string, body: CreatePostRequestBody): Promise<void> {
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `jwt ${Auth.getToken()}`,
+        };
+        return fetch(`${API_HOST}/course/${courseID}/post`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(body),
+        }).then((response) => {
+            if (response.ok) {
+                return;
+            }
+            throw new Error('Failed to create post');
+        });
+    }
+
+    public static createComment(courseID: string, postID: string, body: CreateCommentRequestBody): Promise<void> {
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `jwt ${Auth.getToken()}`,
+        };
+        return fetch(`${API_HOST}/course/${courseID}/post/${postID}/comment`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(body),
+        }).then((response) => {
+            if (response.ok) {
+                return;
+            }
+            throw new Error('Failed to create post');
         });
     }
 }
