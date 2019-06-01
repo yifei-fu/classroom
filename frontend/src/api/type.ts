@@ -91,3 +91,13 @@ export interface UserSignUpRequestBody {
     isInstructor: boolean;
     uid: string;
 }
+
+export interface CreatePostRequestBody {
+    title: string;
+    tags: string[];
+    content: string;
+}
+
+export interface CreateCommentRequestBody {
+    content: string;
+}
