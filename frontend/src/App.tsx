@@ -29,7 +29,11 @@ const App: React.FC = () => {
               <CourseView id={(match.params as {courseID: string}).courseID}/>
             );
           }}/>
-          <Route path='/enroll/:id' component={JoinCourseView}/>
+          <Route path='/enroll/:courseID' render={({match}: RouteComponentProps) => {
+            return (
+              <JoinCourseView id={(match.params as { courseID: string }).courseID}/>
+            );  
+          }}/>
           <Route component={HomePage} />
         </Switch>
       </Router>
