@@ -39,9 +39,9 @@ const Dashboard: React.FC<Props> = (props: Props) => {
     }, []);
 
     // added check to make sure authentication happens first
-    if (!Auth.isSignedIn()) {
-        props.history.push('/signin');
-    }
+    // if (!Auth.isSignedIn()) {
+    //     props.history.push('/signin');
+    // }
 
     return (
         <div className='dashboard'>
