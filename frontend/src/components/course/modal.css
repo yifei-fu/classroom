@@ -3,3 +3,7 @@
     border: none;
     margin-top: 30px;
 }
+
+.disabled-option {
+    background-color: #e8ebee;
+}
