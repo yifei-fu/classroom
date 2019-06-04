@@ -9,6 +9,7 @@ import CardContainer from './CardContainer';
 
 import '../common.css';
 import './Dashboard.css';
+import Auth from '../api/Auth';
 
 function renderCourse(history: History, course: Course, index: number): React.ReactNode {
     return (
@@ -36,6 +37,12 @@ const Dashboard: React.FC<Props> = (props: Props) => {
             setCourses(data);
         });
     }, []);
+
+    // added check to make sure authentication happens first
+    if (!Auth.isSignedIn()) {
+        props.history.push('/signin');
+    }
+
     return (
         <div className='dashboard'>
             <h1 className='display-4'>Dashboard</h1>

@@ -12,6 +12,7 @@ import {CourseDetails} from '../../api/type';
 import '../../common.css';
 import './CourseView.css';
 import {CourseComponentProps} from './type';
+import Auth from '../../api/Auth';
 
 export interface Props extends RouteComponentProps {
   id: string;
@@ -75,6 +76,11 @@ const CourseView: React.FC<Props> = (props: Props) => {
       setLoading(false);
     });
   }, []);
+
+  // added check to make sure authentication happens first
+  if (!Auth.isSignedIn()) {
+    props.history.push(`/signin?next=/course/${id}`);
+  }
 
   if (loading || !courseDetails) {
     return (

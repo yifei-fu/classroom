@@ -1,13 +1,16 @@
 import React from 'react';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import './AuthView.css';
+import Auth from '../api/Auth';
+
+// handle the ?next URL to redirect after auth
 
 const AuthView: React.FC = () => {
     return (
         <div className='root'>
             <div className='form shadow p-3 mb-5 bg-white rounded'>
                 <h3>Sign Up</h3>
-                <Form className='form'>
+                <Form className='form' onSubmit={handleSignUp}>
                     <Form.Row>
                         <Form.Group  controlId='formGridName'>
                             <Col >
@@ -80,7 +83,7 @@ const AuthView: React.FC = () => {
             </div>
             <div className='form shadow p-3 mb-5 bg-white rounded'>
                 <h3>Sign In</h3>
-                <Form className='form'>
+                <Form className='form' onSubmit={handleSignIn}>
                     <Form.Row>
                         <Form.Group controlId='formUsername'>
                             <Col >
@@ -105,5 +108,24 @@ const AuthView: React.FC = () => {
 
     );
 };
+
+function handleSignIn(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    let form = event.currentTarget;
+    let username = form.elements.formUsername.value;
+    let password = form.elements.formBasicPassword.value;
+    try {
+        Auth.login(username, password);
+    }
+    catch {
+        console.log("Login error");
+    }
+}
+
+
+function handleSignUp(event: any) {
+
+}
 
 export default AuthView;

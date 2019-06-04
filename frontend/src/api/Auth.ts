@@ -40,6 +40,7 @@ export default class Auth {
             },
             body: JSON.stringify({ username, password }),
         }).then((response) => {
+            console.log(response);
             if (response.ok) {
                 return response.json();
             }

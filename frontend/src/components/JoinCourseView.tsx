@@ -4,6 +4,7 @@ import { Button, Card, Col, Form, FormCheck, InputGroup, Spinner } from 'react-b
 import { match, Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router';
 import APIManager from '../api/APIManager';
 import { EnrollCourseRequestBody } from '../api/type';
+import Auth from '../api/Auth';
 
 export interface JoinCourseViewProps extends RouteComponentProps {
     id: string;
@@ -28,6 +29,12 @@ class JoinCourseView extends React.Component<JoinCourseViewProps, JoinCourseView
     }
 
     render() {
+
+        // added check to make sure authentication happens first
+        if (!Auth.isSignedIn()) {
+            this.props.history.push(`/signin?next=enroll/${this.props.id}`);
+        }
+
         if (this.state.loading || !this.state.courseDetails) {
             return (
                 <Spinner className='spinner' animation='border' />
@@ -42,22 +49,6 @@ class JoinCourseView extends React.Component<JoinCourseViewProps, JoinCourseView
                         <Card.Subtitle>ID: <b>{this.props.id}</b> </Card.Subtitle>
                         <br></br>
                         <br></br>
-                        {/* <Form onSubmit={(e:any) => this.handleSubmit(e)} validated={this.state.validated} noValidate>
-                                <Form.Group controlId='joinClassSecret' >
-                                    <div style={{ display: 'flex', justifyContent: 'left' }}>
-                                        <Form.Label>Enter code to join:</Form.Label>
-                                    </div>
-                                    <InputGroup>
-                                    <Form.Control type='text' placeholder='Code' onChange={(e: any) => this.handleChange(e)} required/>
-                                        <Form.Control.Feedback type="invalid">
-                                            Please provide a valid city.
-                                        </Form.Control.Feedback>
-                                    </InputGroup>
-                                </Form.Group>
-                            <Button variant='primary' type='submit' >
-                                Join class
-                            </Button>
-                        </Form> */}
 
                         <Form
                             noValidate
