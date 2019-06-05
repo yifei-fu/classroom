@@ -20,7 +20,7 @@ export class CourseController {
         const id = req.query.id;
 
         if (!id) {
-            res.status(400).send('Query parameter not found')
+            return res.status(400).send('Query parameter not found')
         }
 
         getMongoManager().findOne(Course, {id})
@@ -91,6 +91,8 @@ export class CourseController {
         } catch(err) {
             console.log(err)
         }
+
+        res.status(200).send('Course created successfully')
     }
 
     public static async enrollCourse(req, res) {
@@ -112,6 +114,7 @@ export class CourseController {
         console.log('user identified: ', user.id)
         // Check whether course exists
         const course = await getMongoManager().findOne(Course, {studentJoinSecret: secret})
+        console.log(course)
 
         try {
             user.enrolledCourses.forEach(element => {
@@ -119,11 +122,6 @@ export class CourseController {
                     throw new Error()
                 }
             });
-        } catch (err) {
-            return res.status(400).send("User is already enrolled")
-        }
-
-        try {
             course.enrolledUsers.forEach(element => {
                 if (String(element) == String(user.id)) {
                     throw new Error()
