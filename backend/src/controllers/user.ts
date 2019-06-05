@@ -1,9 +1,11 @@
 import {getMongoManager, MongoEntityManager, TreeLevelColumn} from 'typeorm';
 import {Config} from '../config';
 import {User} from '../entity/User';
+import {UserProfile} from '../entity/UserProfile';
 import * as jwt from 'jwt-simple';
-import * as auth from './auth';
-
+import * as crypto from 'crypto';
+import {UserProfileController} from './userprofile';
+import {AuthController} from './auth'
 const config: Config = require('../config.json')
 
 // User Controller Class
@@ -14,30 +16,33 @@ export class UserController {
             res.status(400).send('No valid credentials found')
             return
         }
-        getMongoManager().findOne(User, {username, password}).then((doc) => {
+
+        const hash = crypto.createHmac('sha256', config.jwtSecret).update(password).digest('hex');
+        console.log(hash)
+        getMongoManager().findOne(User, {username, password: hash}).then((doc) => {
             if (doc) {
                 console.log('Found User')
 
                 // Return jwt token
                 const payload = {
-                    uid: doc.uid
+                    uid: doc.uid,
+                    isInstructor: doc.isInstructor
                 };
                 const token = jwt.encode(payload, config.jwtSecret)
                 res.json({
                     token: token
                 });
             } else {
-                res.json({'detail': 'Authentcation failed'});
+                res.status(400).send('Authentcation failed');
             }
         });
     }
 
     public static logout(req, res) {
-        /*TODO: Clear cookie with JWT*/
         res.send();
     }
 
-    public static createUser(req, res) {
+    public static async createUser(req, res) {
         const {username, firstname, lastname, email, password, isInstructor, uid} = req.body
 
         if (!username || !firstname || !lastname || !email || !password || !isInstructor || !uid) {
@@ -46,16 +51,29 @@ export class UserController {
         }
 
         // Check whether user exists
-        getMongoManager().findOne(User, {username})
+        getMongoManager().findOne(User, {where: {$or: [{username}, {email}, {uid}]}})
         .then((doc) => {
             if (!doc) {
+                const hash: string = crypto.createHmac('sha256', config.jwtSecret)
+                .update(password)
+                .digest('hex');
+                let instructorBool: boolean;
+                if (isInstructor == 'false'){
+                    instructorBool = false;
+                } else if (isInstructor == 'true'){
+                    console.log('Instructor detected')
+                    instructorBool = true;
+                } else {
+                    res.status(400).send('isInstructor param has unknown value');
+                }
+
                 const newUser = {
                     username,
                     firstname,
                     lastname,
                     email,
-                    password,
-                    isInstructor,
+                    password: hash,
+                    isInstructor: instructorBool,
                     uid,
                     enrolledCourses: new Array()
                 };
@@ -64,28 +82,34 @@ export class UserController {
                 .then(() => console.log('User created'))
                 .catch((err) => {console.log(err); });
 
-                res.send(200, 'Successful operation');
-                /* TODO: When user is created, a user profile should be created as well
-                Call creatUserProfile()
-                */
+                /* When user is created, a user profile should be created as well*/
+                UserProfileController.createUserProfile(newUser).then((r)=>{
+                    console.log(r.result)
+                    res.status(200).send('User created')
+                });
             } else {
-                res.send(400, 'User already exists');
+                res.status(400).send('User already exists');
             }
         });
     }
 
-    public static getUser(req, res) {
-        /* TODO: Implement jwt */
-        // Identify user with jwt
-        const username = 'user';
+    public static async getUser(req, res) {
+        const token: string = req.body.token || req.headers['token'] || req.headers['x-access-token'];
+        if (!token) {
+            return res.status(400).send('Auth token missing')
+        }
 
-        getMongoManager().findOne(User, {username})
-        .then((doc) => {
-            console.log('Obtained User');
-            res.send();
-        })
-        .catch((err) => {
-            console.log(err);
+        const user = await AuthController.VerifyToken(token)
+        if (!user) {
+            return res.status(400).send('Invalid auth token')
+        }
+
+        console.log('User identified: ', user.uid)
+
+        getMongoManager().findOne(UserProfile, {uid: user.uid})
+        .then((profile)=>{
+            console.log(profile);
+            res.json(profile);
         });
     }
 

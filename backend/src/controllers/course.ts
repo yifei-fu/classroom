@@ -1,4 +1,5 @@
-import {getMongoManager, ObjectID} from 'typeorm';
+import {getMongoManager} from 'typeorm';
+import {ObjectID} from 'mongodb'
 
 /* Entities */
 import {Course} from '../entity/Course';
@@ -7,6 +8,7 @@ import {User} from '../entity/User'
 /* Auth */
 // Import authentication controller
 import * as authentication from './auth';
+import { UserProfile } from '../entity/UserProfile';
 
 const auth = authentication.auth();
 
@@ -17,15 +19,17 @@ export const toObjectId = (value: string | ObjectID): ObjectID => {
 // Course Controller Class
 export class CourseController {
     public static getCourse(req, res) {
-        const id = req.query.id;
+        const id = toObjectId(req.params.id);
 
         if (!id) {
-            res.status(400).send('Query parameter not found')
+            return res.status(400).send('id parameter not found')
         }
 
-        getMongoManager().findOne(Course, {id})
+        getMongoManager().findOne(Course, id)
         .then((doc) => {
-            res.json(doc)})
+            if (doc) {return res.json(doc)}
+            else {return res.status(400).send('Course with that id does not exists')}
+        })
         .catch((err) => {
             console.log(err)
         })
@@ -82,15 +86,18 @@ export class CourseController {
             term,
             studentJoinSecret,
             TAJoinSecret,
+            instructors: new Array(),
             enrolledUsers: new Array(),
         };
 
         try {
             const result = await getMongoManager().insertOne(Course, course)
-            console.log(result)
+            console.log(result.insertedId)
         } catch(err) {
             console.log(err)
         }
+
+        res.status(200).send('Course created successfully')
     }
 
     public static async enrollCourse(req, res) {
@@ -98,6 +105,8 @@ export class CourseController {
         if (!secret){
             res.status(400).send('Course secret missing');
         }
+
+        const id: ObjectID = req.params.id
 
         const token: string = req.body.token || req.headers['token'] || req.headers['x-access-token'];
         if (!token) {
@@ -110,61 +119,131 @@ export class CourseController {
         }
 
         console.log('user identified: ', user.id)
+        
         // Check whether course exists
-        const course = await getMongoManager().findOne(Course, {studentJoinSecret: secret})
-
-        try {
-            user.enrolledCourses.forEach(element => {
-                if (String(element) == String(course.id)) {
-                    throw new Error()
-                }
-            });
-        } catch (err) {
-            return res.status(400).send("User is already enrolled")
+        const course = await getMongoManager().findOne(Course, id)
+        if (!course) {
+            return res.status(400).send('Invalid course id')
         }
 
-        try {
-            course.enrolledUsers.forEach(element => {
-                if (String(element) == String(user.id)) {
-                    throw new Error()
-                }
+        if (user.isInstructor == true) {
+            if (course.TAJoinSecret != secret) {
+                return res.status(400).send('TASecret and Course ID do not match.')
+            }
+            
+            try {
+                user.enrolledCourses.forEach(element => {
+                    if (String(element) == String(course.id)) {
+                        throw new Error()
+                    }
+                });
+                course.instructors.forEach(element => {
+                    if (element.uid == user.uid) {
+                        throw new Error()
+                    }
+                });
+            } catch (err) {
+                console.log(err)
+                return res.status(400).send("TA is already enrolled")
+            }
+
+            const s1 = await getMongoManager()
+            .findOneAndUpdate(
+                User, 
+                {_id: user.id},
+                {$push: {enrolledCourses: course.id}})
+            .catch(err => {
+                console.log(err)
+                res.status(400).send(err)
             });
-        } catch (err) {
-            return res.status(400).send("User is already enrolled")
+    
+            const TAProfile = await getMongoManager()
+            .findOne(UserProfile, {uid: user.uid});
+
+            console.log("TAProfile:", TAProfile)
+
+            const s2 = await getMongoManager()
+            .findOneAndUpdate(
+                Course,
+                {_id: course.id},
+                {$push: {instructors: TAProfile}})
+            .catch(err => {
+                console.log(err)
+                res.status(400).send(err)
+            });
+    
+            // console.log(s1)
+            // console.log(s2)
+    
+            return res.status(200).send("Instructor added successfully.")
+
+        } else {
+            if (course.studentJoinSecret != secret) {
+                return res.status(400).send('studentSecret and Course ID do not match.')
+            }
+
+            try {
+                user.enrolledCourses.forEach(element => {
+                    if (String(element) == String(course.id)) {
+                        throw new Error()
+                    }
+                });
+                course.enrolledUsers.forEach(element => {
+                    if (String(element) == String(user.id)) {
+                        throw new Error()
+                    }
+                });
+            } catch (err) {
+                return res.status(400).send("User is already enrolled")
+            }
+
+            const s1 = await getMongoManager()
+            .findOneAndUpdate(
+                User, 
+                {_id: user.id},
+                {$push: {enrolledCourses: course.id}})
+            .catch(err => {
+                console.log(err)
+                res.status(400).send(err)
+            });
+    
+            const s2 = await getMongoManager()
+            .findOneAndUpdate(
+                Course,
+                {_id: course.id},
+                {$push: {enrolledUsers: user.id}})
+            .catch(err => {
+                console.log(err)
+                res.status(400).send(err)
+            });
+    
+            // console.log(s1)
+            // console.log(s2)  
+    
+            return res.status(200).send("User enrolled successfully.")
         }
-
-        const s1 = await getMongoManager()
-        .findOneAndUpdate(
-            User, 
-            {_id: user.id},
-            {$push: {enrolledCourses: course.id}})
-        .catch(err => {
-            console.log(err)
-            res.status(400).send(err)
-        });
-
-        const s2 = await getMongoManager()
-        .findOneAndUpdate(
-            Course,
-            {_id: course.id},
-            {$push: {enrolledUsers: user.id}})
-        .catch(err => {
-            console.log(err)
-            res.status(400).send(err)
-        });
-
-        console.log(s1)
-        console.log(s2)
-
-        return res.status(200).send("User enrolled successfully.")
     }
 
     public static getProfiles(req, res) {
-        const coursename = req.query.course;
+        const id: ObjectID = toObjectId(req.params.id);
 
-        getMongoManager().find(Course, {name: coursename})
-        .then((doc) => {
-            res.json(doc);
+        getMongoManager().findOne(Course, id)
+        .then((course) => {
+            if (!course) {
+                return res.status(400).send('Invalid course id')
+            }
+            const users = course.enrolledUsers
+            getMongoManager().findByIds(User, users)
+                .then((docs)=>{
+                    if (docs) {
+                    docs.forEach(user => {
+                        delete user.password
+                        delete user.username
+                        delete user.uid
+                    });
+                    return res.json(docs)
+                    }
+                })
         });
     }
 

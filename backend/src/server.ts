@@ -21,7 +21,6 @@ import {UserProfileController} from './controllers/userprofile';
 // get configurations from environment variables
 const port: number = Number(process.env.PORT) || 8080;
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
-const jsonencodedParser = bodyParser.json();
 
 const options: ConnectionOptions = {
     type: 'mongodb',
@@ -41,7 +40,7 @@ function PopulateDatabase(connection: Connection) {
 
     const course = new Course();
     course.name = 'CS130';
-    course.instructor = user;
+    course.instructors = new Array();
     course.school = 'UCLA';
     course.term = 'Spring 2019';
 
@@ -62,8 +61,6 @@ const connection = createConnection(options).then((connection) => {
 });
 
 const app = express();
-const auth = authentication.auth();
-const manager = getMongoManager();
 
 // initialize middleware
 app.use(bodyParser.json());
@@ -102,16 +99,16 @@ app.get('/user/logout', urlencodedParser, UserController.logout);
 app.get('/courses', CourseController.listCourses);
 
 // Get Course by name
-app.get('/course', urlencodedParser, CourseController.getCourse);
+app.get('/course/:id', urlencodedParser, CourseController.getCourse);
 
 // Creat Course
 app.post('/course', urlencodedParser, CourseController.createCourse);
 
 // Get User enrolled in a course
-app.get('/course/users', urlencodedParser, CourseController.getProfiles);
+app.get('/course/:id/users', urlencodedParser, CourseController.getProfiles);
 
 // Enroll a user in a course
-app.put('/course/enroll', urlencodedParser, CourseController.enrollCourse);
+app.put('/course/:id/enroll', urlencodedParser, CourseController.enrollCourse);
 
 // start Express app
 app.listen(port, () => {

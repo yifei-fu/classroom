@@ -17,7 +17,7 @@ export class Course {
     public term: string;
 
     @Column((type) => UserProfile)
-    public instructor: UserProfile;
+    public instructors: UserProfile[];
 
     @Column()
     public studentJoinSecret: string;
