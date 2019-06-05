@@ -25,7 +25,8 @@ export class UserController {
 
                 // Return jwt token
                 const payload = {
-                    uid: doc.uid
+                    uid: doc.uid,
+                    isInstructor: false
                 };
                 const token = jwt.encode(payload, config.jwtSecret)
                 res.json({
