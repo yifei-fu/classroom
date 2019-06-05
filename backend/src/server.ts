@@ -21,7 +21,6 @@ import {UserProfileController} from './controllers/userprofile';
 // get configurations from environment variables
 const port: number = Number(process.env.PORT) || 8080;
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
-const jsonencodedParser = bodyParser.json();
 
 const options: ConnectionOptions = {
     type: 'mongodb',
@@ -62,8 +61,6 @@ const connection = createConnection(options).then((connection) => {
 });
 
 const app = express();
-const auth = authentication.auth();
-const manager = getMongoManager();
 
 // initialize middleware
 app.use(bodyParser.json());
