@@ -1,4 +1,5 @@
-import {Column, Entity, ObjectID, ObjectIdColumn, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, ObjectID, ObjectIdColumn, PrimaryGeneratedColumn, OneToOne, JoinColumn} from 'typeorm';
+import { User } from './User';
 
 @Entity()
 export class UserProfile {
@@ -16,8 +17,14 @@ export class UserProfile {
     public lastName: string;
 
     @Column()
+    public email: string;
+
+    @Column()
     public isInstructor: boolean;
 
     @Column()
     public enrolledCourses: ObjectID[];
+
+    @Column()
+    public uid: string;
 }
