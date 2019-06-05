@@ -11,7 +11,8 @@ export class UserController {
     public static login(req, res) {
         const {username, password} = req.body;
         if (!username && !password) {
-            res.send(404, 'No valid credentials found')
+            res.status(400).send('No valid credentials found')
+            return
         }
         getMongoManager().findOne(User, {username, password}).then((doc) => {
             if (doc) {
@@ -39,7 +40,10 @@ export class UserController {
     public static createUser(req, res) {
         const {username, firstname, lastname, email, password, isInstructor, uid} = req.body
 
-        /* TODO: Validate fields */
+        if (!username || !firstname || !lastname || !email || !password || !isInstructor || !uid) {
+            res.status(400).send('Missing information');
+            return;
+        }
 
         // Check whether user exists
         getMongoManager().findOne(User, {username})
@@ -53,6 +57,7 @@ export class UserController {
                     password,
                     isInstructor,
                     uid,
+                    enrolledCourses: new Array()
                 };
 
                 getMongoManager().insertOne(User, newUser)
