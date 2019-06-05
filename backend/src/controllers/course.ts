@@ -160,9 +160,18 @@ export class CourseController {
     public static getProfiles(req, res) {
         const coursename = req.query.course;
 
-        getMongoManager().find(Course, {name: coursename})
-        .then((doc) => {
-            res.json(doc);
+        getMongoManager().findOne(Course, {name: coursename})
+        .then((course) => {
+            const users = course.enrolledUsers
+            getMongoManager().findByIds(User, users)
+                .then((docs)=>{
+                    docs.forEach(user => {
+                        delete user.password
+                        delete user.username
+                        delete user.uid
+                    });
+                    res.json(docs)
+                })
         });
     }
 
