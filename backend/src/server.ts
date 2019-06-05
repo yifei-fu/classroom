@@ -40,7 +40,7 @@ function PopulateDatabase(connection: Connection) {
 
     const course = new Course();
     course.name = 'CS130';
-    course.instructor = user;
+    course.instructors = new Array();
     course.school = 'UCLA';
     course.term = 'Spring 2019';
 
@@ -99,16 +99,16 @@ app.get('/user/logout', urlencodedParser, UserController.logout);
 app.get('/courses', CourseController.listCourses);
 
 // Get Course by name
-app.get('/course', urlencodedParser, CourseController.getCourse);
+app.get('/course/:id', urlencodedParser, CourseController.getCourse);
 
 // Creat Course
 app.post('/course', urlencodedParser, CourseController.createCourse);
 
 // Get User enrolled in a course
-app.get('/course/users', urlencodedParser, CourseController.getProfiles);
+app.get('/course/:id/users', urlencodedParser, CourseController.getProfiles);
 
 // Enroll a user in a course
-app.put('/course/enroll', urlencodedParser, CourseController.enrollCourse);
+app.put('/course/:id/enroll', urlencodedParser, CourseController.enrollCourse);
 
 // start Express app
 app.listen(port, () => {
