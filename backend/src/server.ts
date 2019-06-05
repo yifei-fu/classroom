@@ -5,6 +5,7 @@ import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
 import * as cors from 'cors';
 import * as express from 'express';
+import * as authentication from './controllers/auth'
 import {Connection, ConnectionOptions, createConnection, getMongoManager} from 'typeorm';
 
 // Import Entities
@@ -61,6 +62,7 @@ const connection = createConnection(options).then((connection) => {
 });
 
 const app = express();
+const auth = authentication.auth();
 const manager = getMongoManager();
 
 // initialize middleware

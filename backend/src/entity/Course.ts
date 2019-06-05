@@ -24,4 +24,7 @@ export class Course {
 
     @Column()
     public TAJoinSecret: string;
+
+    @Column()
+    public enrolledUsers: ObjectID[];
 }
