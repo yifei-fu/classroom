@@ -3,7 +3,7 @@ import {Config} from '../config';
 import {User} from '../entity/User';
 import {UserProfile} from '../entity/UserProfile';
 import * as jwt from 'jwt-simple';
-import * as auth from './auth';
+import * as crypto from 'crypto';
 import {UserProfileController} from './userprofile';
 import {AuthController} from './auth'
 const config: Config = require('../config.json')
@@ -16,7 +16,10 @@ export class UserController {
             res.status(400).send('No valid credentials found')
             return
         }
-        getMongoManager().findOne(User, {username, password}).then((doc) => {
+
+        const hash = crypto.createHmac('sha256', config.jwtSecret).update(password).digest('hex');
+        console.log(hash)
+        getMongoManager().findOne(User, {username, password: hash}).then((doc) => {
             if (doc) {
                 console.log('Found User')
 
@@ -29,13 +32,12 @@ export class UserController {
                     token: token
                 });
             } else {
-                res.json({'detail': 'Authentcation failed'});
+                res.status(400).send('Authentcation failed');
             }
         });
     }
 
     public static logout(req, res) {
-        /*TODO: Clear cookie with JWT*/
         res.send();
     }
 
@@ -51,12 +53,15 @@ export class UserController {
         getMongoManager().findOne(User, {where: {$or: [{username}, {email}, {uid}]}})
         .then((doc) => {
             if (!doc) {
+                const hash = crypto.createHmac('sha256', config.jwtSecret)
+                .update(password)
+                .digest('hex');
                 const newUser = {
                     username,
                     firstname,
                     lastname,
                     email,
-                    password,
+                    password: hash,
                     isInstructor,
                     uid,
                     enrolledCourses: new Array()
@@ -88,7 +93,7 @@ export class UserController {
             return res.status(400).send('Invalid auth token')
         }
 
-        console.log('user identified: ', user.uid)
+        console.log('User identified: ', user.uid)
 
         getMongoManager().findOne(UserProfile, {uid: user.uid})
         .then((profile)=>{
