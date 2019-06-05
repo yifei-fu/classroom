@@ -26,4 +26,7 @@ export class User {
 
     @Column()
     public uid: string;
+
+    @Column()
+    public enrolledCourses: ObjectID[]
 }
