@@ -1,6 +1,5 @@
 import {getMongoManager} from 'typeorm';
 import {UserProfile} from '../entity/UserProfile';
-import {User} from '../entity/User';
 
 // UserProfile Controller Class
 export class UserProfileController {
