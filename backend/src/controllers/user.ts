@@ -26,7 +26,7 @@ export class UserController {
                 // Return jwt token
                 const payload = {
                     uid: doc.uid,
-                    isInstructor: false
+                    isInstructor: doc.isInstructor
                 };
                 const token = jwt.encode(payload, config.jwtSecret)
                 res.json({
@@ -57,13 +57,23 @@ export class UserController {
                 const hash = crypto.createHmac('sha256', config.jwtSecret)
                 .update(password)
                 .digest('hex');
+                let instructorBool;
+                if (isInstructor == 'false'){
+                    instructorBool = false;
+                } else if (isInstructor == 'true'){
+                    console.log('Instructor detected')
+                    instructorBool = true;
+                } else {
+                    res.status(400).send('isInstructor param has unknown value');
+                }
+
                 const newUser = {
                     username,
                     firstname,
                     lastname,
                     email,
                     password: hash,
-                    isInstructor,
+                    isInstructor: instructorBool,
                     uid,
                     enrolledCourses: new Array()
                 };
