@@ -54,10 +54,10 @@ export class UserController {
         getMongoManager().findOne(User, {where: {$or: [{username}, {email}, {uid}]}})
         .then((doc) => {
             if (!doc) {
-                const hash = crypto.createHmac('sha256', config.jwtSecret)
+                const hash: string = crypto.createHmac('sha256', config.jwtSecret)
                 .update(password)
                 .digest('hex');
-                let instructorBool;
+                let instructorBool: boolean;
                 if (isInstructor == 'false'){
                     instructorBool = false;
                 } else if (isInstructor == 'true'){
@@ -84,7 +84,7 @@ export class UserController {
 
                 /* When user is created, a user profile should be created as well*/
                 UserProfileController.createUserProfile(newUser).then((r)=>{
-                    console.log(r)
+                    console.log(r.result)
                     res.status(200).send('User created')
                 });
             } else {
