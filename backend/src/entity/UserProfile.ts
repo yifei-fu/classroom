@@ -17,4 +17,7 @@ export class UserProfile {
 
     @Column()
     public isInstructor: boolean;
+
+    @Column()
+    public enrolledCourses: ObjectID[];
 }
