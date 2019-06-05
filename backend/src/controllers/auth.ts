@@ -20,7 +20,8 @@ export function auth() {
         user.then((user) => {
             if (user != null) {
                 return done(null, {
-                    uid: user.uid
+                    uid: user.uid,
+                    isInstructor: false
                 });
             } else {
                 return done(new Error("User not found"), null);
