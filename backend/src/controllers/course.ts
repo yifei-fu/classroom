@@ -8,6 +8,7 @@ import {User} from '../entity/User'
 /* Auth */
 // Import authentication controller
 import * as authentication from './auth';
+import { UserProfile } from '../entity/UserProfile';
 
 const auth = authentication.auth();
 
@@ -21,12 +22,14 @@ export class CourseController {
         const id = toObjectId(req.params.id);
 
         if (!id) {
-            return res.status(400).send('Id parameter not found')
+            return res.status(400).send('id parameter not found')
         }
 
         getMongoManager().findOne(Course, id)
         .then((doc) => {
-            res.json(doc)})
+            if (doc) {return res.json(doc)}
+            else {return res.status(400).send('Course with that id does not exists')}
+        })
         .catch((err) => {
             console.log(err)
         })
@@ -89,7 +92,7 @@ export class CourseController {
 
         try {
             const result = await getMongoManager().insertOne(Course, course)
-            console.log(result)
+            console.log(result.insertedId)
         } catch(err) {
             console.log(err)
         }
@@ -119,7 +122,9 @@ export class CourseController {
         
         // Check whether course exists
         const course = await getMongoManager().findOne(Course, id)
-        console.log(course)
+        if (!course) {
+            return res.status(400).send('Invalid course id')
+        }
 
         if (user.isInstructor == true) {
             if (course.TAJoinSecret != secret) {
@@ -152,18 +157,23 @@ export class CourseController {
                 res.status(400).send(err)
             });
     
+            const TAProfile = await getMongoManager()
+            .findOne(UserProfile, {uid: user.uid});
+
+            console.log("TAProfile:", TAProfile)
+
             const s2 = await getMongoManager()
             .findOneAndUpdate(
                 Course,
                 {_id: course.id},
-                {$push: {instructors: user.id}})
+                {$push: {instructors: TAProfile}})
             .catch(err => {
                 console.log(err)
                 res.status(400).send(err)
             });
     
-            console.log(s1)
-            console.log(s2)
+            // console.log(s1)
+            // console.log(s2)
     
             return res.status(200).send("Instructor added successfully.")
 
@@ -207,8 +217,8 @@ export class CourseController {
                 res.status(400).send(err)
             });
     
-            console.log(s1)
-            console.log(s2)
+            // console.log(s1)
+            // console.log(s2)  
     
             return res.status(200).send("User enrolled successfully.")
         }
@@ -218,16 +228,21 @@ export class CourseController {
         const id: ObjectID = toObjectId(req.params.id);
 
         getMongoManager().findOne(Course, id)
-        .then((course) => { 
+        .then((course) => {
+            if (!course) {
+                return res.status(400).send('Invalid course id')
+            }
             const users = course.enrolledUsers
             getMongoManager().findByIds(User, users)
                 .then((docs)=>{
+                    if (docs) {
                     docs.forEach(user => {
                         delete user.password
                         delete user.username
                         delete user.uid
                     });
-                    res.json(docs)
+                    return res.json(docs)
+                    }
                 })
         });
     }
