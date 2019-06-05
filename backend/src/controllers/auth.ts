@@ -21,7 +21,7 @@ export function auth() {
             if (user != null) {
                 return done(null, {
                     uid: user.uid,
-                    isInstructor: false
+                    isInstructor: user.isInstructor
                 });
             } else {
                 return done(new Error("User not found"), null);
