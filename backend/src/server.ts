@@ -85,7 +85,7 @@ app.get('/users', UserProfileController.getUserProfiles);
 // API endpoints for User
 // ===================================================
 // Get profile of current user
-app.get('/user', auth.authenticate(), UserController.getUser);
+app.get('/user', urlencodedParser, UserController.getUser);
 
 // Create new user
 app.post('/user', urlencodedParser, UserController.createUser);
