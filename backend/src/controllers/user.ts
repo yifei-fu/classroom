@@ -1,4 +1,4 @@
-import {getMongoManager, MongoEntityManager, TreeLevelColumn} from 'typeorm';
+import {getMongoManager} from 'typeorm';
 import {Config} from '../config';
 import {User} from '../entity/User';
 import {UserProfile} from '../entity/UserProfile';
