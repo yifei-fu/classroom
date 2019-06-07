@@ -92,12 +92,11 @@ export class CourseController {
 
         try {
             const result = await getMongoManager().insertOne(Course, course)
-            console.log(result.insertedId)
+            console.log(result.ops[0])
+            return res.json(result.ops[0])
         } catch(err) {
             console.log(err)
         }
-
-        res.status(200).send('Course created successfully')
     }
 
     public static async enrollCourse(req, res) {
