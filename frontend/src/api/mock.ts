@@ -215,6 +215,125 @@ export const sampleCourseDetails: CourseDetails = {
         },
       ],
     },
+
+    {
+      id: 'id',
+      title: 'The final presentation date',
+      tags: [
+        'Project',
+        'Final presentation',
+      ],
+      content: 'Is it confirmed that the presentation is on May 31st or June 7th? Thanks!',
+      author: {
+        username: 'Anonymous',
+        firstName: 'Anonymous',
+        lastName: ' ',
+        role: 'student',
+      },
+      creationTime: 'Fri June 7 2019 16:36:30 GMT-0700 (Pacific Daylight Time)',
+      comments: [
+        {
+          content: 'We will begin them on the 31st and continue into the 7th if needed, as we need time on the 7th to do a review for the final. The order would be randomly selected. For the Gzip and Juvenile court teams, they will be presenting in class Monday of week 10, as decided by Professor Eggert. The TAs are going to be discussing with Professor Eggert tomorrow to begin making the final earlier so we can begin final review this week so more teams can do final presentations next week instead.',
+          author: {
+            username: 'User',
+            firstName: 'Davis',
+            lastName: 'Cho',
+            role: 'TA',
+          },
+          creationTime: 'Fri May 24 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
+        },
+        {
+          content: 'Compared to covering the materials of the last two lectures in the final review, it is much more preferable to do the presentations on Week 10.',
+          author: {
+            username: 'Anonymous',
+            firstName: 'Anonymous',
+            lastName: ' ',
+            role: 'student',
+          },
+          creationTime: 'Fri May 31 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
+        },
+        {
+          content: 'Still think there is not enough time to finish the project in week 9. Really need another week to work on.',
+          author: {
+            username: 'Anonymous',
+            firstName: 'Anonymous',
+            lastName: ' ',
+            role: 'student',
+          },
+          creationTime: 'Fri May 17 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
+        },
+        {
+          content: 'Feel free to bring this up with the professor tomorrow as he would likely listen to the students more than us lowly TAs :c We will also try to convince him as well',
+          author: {
+            username: 'User',
+            firstName: 'Davis',
+            lastName: 'Cho',
+            role: 'TA',
+          },
+          creationTime: 'Fri May 10 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
+        },
+      ],
+    },
+
+    {
+      id: 'id',
+      title: 'The final presentation date',
+      tags: [
+        'Project',
+        'Final presentation',
+      ],
+      content: 'Is it confirmed that the presentation is on May 31st or June 7th? Thanks!',
+      author: {
+        username: 'Anonymous',
+        firstName: 'Anonymous',
+        lastName: ' ',
+        role: 'student',
+      },
+      creationTime: 'Fri June 7 2019 16:36:30 GMT-0700 (Pacific Daylight Time)',
+      comments: [
+        {
+          content: 'We will begin them on the 31st and continue into the 7th if needed, as we need time on the 7th to do a review for the final. The order would be randomly selected. For the Gzip and Juvenile court teams, they will be presenting in class Monday of week 10, as decided by Professor Eggert. The TAs are going to be discussing with Professor Eggert tomorrow to begin making the final earlier so we can begin final review this week so more teams can do final presentations next week instead.',
+          author: {
+            username: 'User',
+            firstName: 'Davis',
+            lastName: 'Cho',
+            role: 'TA',
+          },
+          creationTime: 'Fri May 24 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
+        },
+        {
+          content: 'Compared to covering the materials of the last two lectures in the final review, it is much more preferable to do the presentations on Week 10.',
+          author: {
+            username: 'Anonymous',
+            firstName: 'Anonymous',
+            lastName: ' ',
+            role: 'student',
+          },
+          creationTime: 'Fri May 31 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
+        },
+        {
+          content: 'Still think there is not enough time to finish the project in week 9. Really need another week to work on.',
+          author: {
+            username: 'Anonymous',
+            firstName: 'Anonymous',
+            lastName: ' ',
+            role: 'student',
+          },
+          creationTime: 'Fri May 17 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
+        },
+        {
+          content: 'Feel free to bring this up with the professor tomorrow as he would likely listen to the students more than us lowly TAs :c We will also try to convince him as well',
+          author: {
+            username: 'User',
+            firstName: 'Davis',
+            lastName: 'Cho',
+            role: 'TA',
+          },
+          creationTime: 'Fri May 10 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
+        },
+      ],
+    },
+
     {
       id: 'id',
       title: 'There are two links for submitting Midterm Presentations?',
@@ -244,6 +363,7 @@ export const sampleCourseDetails: CourseDetails = {
       ],
     },
   ],
+  
   quizzes: [
     {
       id: 'id',
@@ -322,6 +442,83 @@ export const sampleCourseDetails: CourseDetails = {
 
     {
       id: 'id',
+      name: 'Quiz for 5/22',
+      questions: [
+        {
+          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
+          text: '',
+          responseType: 'choices',
+          responseChoices: [
+            'Agree',
+            'Disagree',
+            'I do not know',
+          ],
+        },
+        {
+          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
+          text: '',
+          responseType: 'string',
+        },
+        {
+          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
+          text: '',
+          responseType: 'string',
+        },
+      ],
+      startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
+      openToRoles: [
+        'TA',
+        'student',
+      ],
+      resultVisibleToRoles: [
+        'TA',
+        'student',
+      ],
+      secret: 'pass',
+    },
+
+    {
+      id: 'id',
+      name: 'Quiz for 5/29',
+      questions: [
+        {
+          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
+          text: '',
+          responseType: 'choices',
+          responseChoices: [
+            'Agree',
+            'Disagree',
+            'I do not know',
+          ],
+        },
+        {
+          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
+          text: '',
+          responseType: 'string',
+        },
+        {
+          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
+          text: '',
+          responseType: 'string',
+        },
+      ],
+      startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
+      openToRoles: [
+        'TA',
+        'student',
+      ],
+      resultVisibleToRoles: [
+        'TA',
+        'student',
+      ],
+      secret: 'pass',
+    },
+
+
+    {
+      id: 'id',
       name: 'Quiz for 6/8',
       questions: [
         {
@@ -357,6 +554,45 @@ export const sampleCourseDetails: CourseDetails = {
       ],
       secret: 'pass',
     },
+
+    {
+      id: 'id',
+      name: 'Quiz for 6/10',
+      questions: [
+        {
+          title: 'Agree or disagree: Developers should strongly prefer inheritance to delegation.',
+          text: '',
+          responseType: 'choices',
+          responseChoices: [
+            'Agree',
+            'Disagree',
+            'I do not know',
+          ],
+        },
+        {
+          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
+          text: '',
+          responseType: 'string',
+        },
+        {
+          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
+          text: '',
+          responseType: 'string',
+        },
+      ],
+      startTime: 'Fri June 8 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri June 8 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
+      openToRoles: [
+        'TA',
+        'student',
+      ],
+      resultVisibleToRoles: [
+        'TA',
+        'student',
+      ],
+      secret: 'pass',
+    },
+
     {
       id: 'id',
       name: 'Quiz for 6/7',
@@ -394,6 +630,45 @@ export const sampleCourseDetails: CourseDetails = {
       ],
       secret: 'pass',
     },
+
+    {
+      id: 'id',
+      name: 'Quiz for 6/7',
+      questions: [
+        {
+          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
+          text: '',
+          responseType: 'choices',
+          responseChoices: [
+            'Agree',
+            'Disagree',
+            'I do not know',
+          ],
+        },
+        {
+          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
+          text: '',
+          responseType: 'string',
+        },
+        {
+          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
+          text: '',
+          responseType: 'string',
+        },
+      ],
+      startTime: 'Fri June 7 2019 15:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri June 7 2019 15:00:05 GMT-0700 (Pacific Daylight Time)',
+      openToRoles: [
+        'TA',
+        'student',
+      ],
+      resultVisibleToRoles: [
+        'TA',
+        'student',
+      ],
+      secret: 'pass',
+    },
+    
   ],
   enrolledUsers: [
     {
