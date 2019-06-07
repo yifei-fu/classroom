@@ -65,7 +65,6 @@ export class CourseController {
                         courses.forEach(course => {
                             delete course.studentJoinSecret
                             delete course.TAJoinSecret
-                            delete course.enrolledUsers
                         })
                         return res.json(courses)
                     })
@@ -81,9 +80,9 @@ export class CourseController {
     }
 
     public static async createCourse(req, res) {
-        const {name, school, term} = req.body;
+        const {name, school, term, description} = req.body;
 
-        if (!name || !school || !term) {
+        if (!name|| !school|| !term) {
             res.send(400, 'Missing information')
         }
 
@@ -149,7 +148,7 @@ export class CourseController {
         const courseDetails = getMongoManager().create(CourseDetails, {
             courseID: String(result.id),
             name: result.name,
-            description: 'Cool and exciting class',
+            description: description,
             school: result.school,
             term: result.term,
             studentJoinSecret: result.studentJoinSecret,
