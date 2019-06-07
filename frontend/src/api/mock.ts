@@ -246,31 +246,143 @@ export const sampleCourseDetails: CourseDetails = {
   quizzes: [
     {
       id: 'id',
-      name: 'JavaScript 101',
+      name: 'Quiz for 5/15',
       questions: [
         {
-          title: 'What\'s typeof null?',
+          title: 'Agree or disagree: White-box testing is typically more cost-effective than black-box testing for testing the security of applications like my.ucla.edu.',
           text: '',
           responseType: 'choices',
           responseChoices: [
-            'null',
-            'object',
-            'undefined',
+            'Agree',
+            'Disagree',
+            'I do not know',
           ],
         },
         {
-          title: 'What\'s the result of evaluating the expression?',
-          text: '[1,2,3].map(parseInt)',
+          title: 'Please justify: For software reliability in an application like onboard communication and life-support software for the Deep Space Transport, N-version programming is overall more cost-effective than spending the same amount of money improving the reliability of a 1-version program.',
+          text: '',
           responseType: 'string',
         },
         {
-          title: 'How many days was the first JavaScript prototype created?',
+          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
           text: '',
-          responseType: 'number',
+          responseType: 'string',
         },
       ],
-      startTime: 'Fri May 24 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Mon Jun 24 2019 16:36:30 GMT-0700 (Pacific Daylight Time)',
+      startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
+      openToRoles: [
+        'TA',
+        'student',
+      ],
+      resultVisibleToRoles: [
+        'TA',
+        'student',
+      ],
+      secret: 'pass',
+    },
+    {
+      id: 'id',
+      name: 'Quiz for 5/8',
+      questions: [
+        {
+          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
+          text: '',
+          responseType: 'choices',
+          responseChoices: [
+            'Agree',
+            'Disagree',
+            'I do not know',
+          ],
+        },
+        {
+          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
+          text: '',
+          responseType: 'string',
+        },
+        {
+          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
+          text: '',
+          responseType: 'string',
+        },
+      ],
+      startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
+      openToRoles: [
+        'TA',
+        'student',
+      ],
+      resultVisibleToRoles: [
+        'TA',
+        'student',
+      ],
+      secret: 'pass',
+    },
+
+    {
+      id: 'id',
+      name: 'Quiz for 6/8',
+      questions: [
+        {
+          title: 'Agree or disagree: Developers should strongly prefer inheritance to delegation.',
+          text: '',
+          responseType: 'choices',
+          responseChoices: [
+            'Agree',
+            'Disagree',
+            'I do not know',
+          ],
+        },
+        {
+          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
+          text: '',
+          responseType: 'string',
+        },
+        {
+          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
+          text: '',
+          responseType: 'string',
+        },
+      ],
+      startTime: 'Fri June 8 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri June 8 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
+      openToRoles: [
+        'TA',
+        'student',
+      ],
+      resultVisibleToRoles: [
+        'TA',
+        'student',
+      ],
+      secret: 'pass',
+    },
+    {
+      id: 'id',
+      name: 'Quiz for 6/7',
+      questions: [
+        {
+          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
+          text: '',
+          responseType: 'choices',
+          responseChoices: [
+            'Agree',
+            'Disagree',
+            'I do not know',
+          ],
+        },
+        {
+          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
+          text: '',
+          responseType: 'string',
+        },
+        {
+          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
+          text: '',
+          responseType: 'string',
+        },
+      ],
+      startTime: 'Fri June 7 2019 15:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri June 7 2019 15:00:05 GMT-0700 (Pacific Daylight Time)',
       openToRoles: [
         'TA',
         'student',
