@@ -24,7 +24,7 @@ const DiscussionView: React.FC<Props> = (props: Props) => {
       />
       <Container fluid>
         <Row>
-          {posts.map((post: Post, idx: number) => (
+          {posts && posts.map((post: Post, idx: number) => (
             <Col md={12} lg={6} xl={4}>
               <PostCard key={idx} courseID={props.courseDetails.id} post={post} />
             </Col>

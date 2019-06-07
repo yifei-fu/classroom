@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, {useEffect, useState} from 'react';
 import {ListGroup} from 'react-bootstrap';
 
+import ReactTable from 'react-table';
 import {Question} from '../../api/type';
 import '../../common.css';
 import CardContainer from '../CardContainer';
@@ -85,6 +86,42 @@ const QuestionCard: React.FC<Props> = (props: Props) => {
       <h6>{question.title}</h6>
       <p>{question.text}</p>
       {renderResponse(props)}
+      {
+        question.responses && (
+          <ReactTable
+            data={question.responses}
+            className='rounded20'
+            columns={[
+              {
+                Header: 'Username',
+                accessor: 'user.username',
+              },
+              {
+                id: 'name',
+                Header: 'Name',
+                accessor: (item) => {
+                  if (!item.user) {
+                    return '';
+                  }
+                  return `${item.user.firstName} ${item.user.lastName}`;
+                },
+              },
+              {
+                Header: 'UID',
+                accessor: 'user.uid',
+              },
+              {
+                Header: 'Role',
+                accessor: 'user.role',
+              },
+              {
+                Header: 'Answer',
+                accessor: 'value',
+              }
+            ]}
+          />
+        )
+      }
     </CardContainer>
   );
 };

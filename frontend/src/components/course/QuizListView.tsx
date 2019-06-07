@@ -36,7 +36,7 @@ function renderQuizItem(props: Props, quiz: Quiz, idx: number): React.ReactNode 
         </span>
         <span className='text-secondary'>
           <FontAwesomeIcon className='mr-2' icon={['far', 'hourglass']}/>
-          {moment(quiz.endTime).diff(moment(quiz.startTime))} minutes
+          {moment(quiz.endTime).diff(moment(quiz.startTime), 'minutes')} minutes
         </span>
       </div>
     </ListGroup.Item>

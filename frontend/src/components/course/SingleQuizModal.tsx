@@ -3,7 +3,7 @@ import {Button, Modal} from 'react-bootstrap';
 
 import {RouteComponentProps} from 'react-router';
 import {toast} from 'react-toastify';
-import {Question, Quiz, QuizResponse} from '../../api/type';
+import {Question, Quiz, QuestionResponse} from '../../api/type';
 import '../../common.css';
 import {quizTime} from '../utils';
 import './modal.css';
@@ -56,9 +56,9 @@ const SingleQuizModal: React.FC<Props> = (props: Props) => {
   const {courseID, quiz, history} = props;
   const [responses, setResponses] = useState<Array<string | number>>(initializeResponses(quiz.questions || []));
   const [responseSubmitted, setResponsesSubmitted] = useState<boolean>(false);
-  useEffect(() => {
-    setTimeout(() => setResponsesSubmitted(true), 10000);
-  }, []);
+  const handleSubmit = () => {
+    setTimeout(() => setResponsesSubmitted(true), 200);
+  };
 
   const time = quizTime(quiz);
   const allowSubmit: boolean = time === 'current' && !responseSubmitted;
@@ -78,7 +78,10 @@ const SingleQuizModal: React.FC<Props> = (props: Props) => {
         {renderQuestions(allowSubmit, responses, setResponses, props)}
         {
           allowSubmit &&
-          <Button className='mt-3 ml-auto mr-auto button primary-gradient shadow'>
+          <Button
+            className='mt-3 ml-auto mr-auto button primary-gradient shadow'
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
         }

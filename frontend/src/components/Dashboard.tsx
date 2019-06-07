@@ -20,7 +20,7 @@ function renderCourse(history: History, course: Course, index: number): React.Re
           <Avatar text={(course.name.match(/^[a-zA-Z]+/) || [course.name])[0]}/>
             <div className='course-text'>
               <h5>{course.name}</h5>
-              <div>{course.school} {course.term} by {course.instructor.firstName} {course.instructor.lastName}</div>
+              <div>{course.school} {course.term} by {course.instructors[0].firstName} {course.instructors[0].lastName}</div>
             </div>
       </ListGroup.Item>
     );
@@ -55,7 +55,7 @@ const Dashboard: React.FC<Props> = (props: Props) => {
             onClick={() => setCreateCourseModalOpen(true)}
           >
             <FontAwesomeIcon icon='plus' color='white' className='ml-1 mr-2' />
-            Create a New Course
+            Create A New Course
           </Button>
         </div>
     );
