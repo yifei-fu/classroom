@@ -98,6 +98,27 @@ export interface CreatePostRequestBody {
     content: string;
 }
 
+export interface CreateQuizRequestBody {
+    /*
+    title1: string;
+    answer1: string;
+    content1: string;
+    
+    title2: string;
+    answer2: string;
+    content2: string;
+
+    title3: string;
+    answer3: string;
+    content3: string;
+    */
+
+    title: string;
+    tags: string[];
+    content: string;
+    answer: string;
+}
+
 export interface CreateCommentRequestBody {
     content: string;
 }
