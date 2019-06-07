@@ -87,7 +87,13 @@ export class UserController {
                 /* When user is created, a user profile should be created as well*/
                 UserProfileController.createUserProfile(newUser).then((r)=>{
                     console.log(r.result)
-                    res.status(200).send('User created')
+                    // Return jwt token
+                    const payload = {
+                        uid: newUser.uid,
+                        isInstructor: newUser.isInstructor
+                    };
+                    const token = jwt.encode(payload, config.jwtSecret)
+                    res.json({token: token});
                 });
             } else {
                 res.status(400).send('User already exists');

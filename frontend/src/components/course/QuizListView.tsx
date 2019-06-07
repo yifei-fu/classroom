@@ -1,11 +1,21 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
-import {Col, Container, ListGroup, Row} from 'react-bootstrap';
-import {CourseDetails, Quiz} from '../../api/type';
+import {Button, Col, Container, ListGroup, Row} from 'react-bootstrap';
+import {CourseDetails, Quiz, Post} from '../../api/type';
 import CardContainer from '../CardContainer';
 import {QuizTime, quizTime} from '../utils';
 import {CourseComponentProps} from './type';
+
+
+
+import '../../common.css';
+import CreateQuizModal from './CreateQuizModal';
+
+/*
+export interface Props {
+  courseDetails: CourseDetails;
+}*/
 
 export interface Props extends CourseComponentProps {
 }
@@ -35,8 +45,15 @@ function renderQuizItem(props: Props, quiz: Quiz, idx: number): React.ReactNode 
 
 const QuizListView: React.FC<Props> = (props: Props) => {
   const {quizzes} = props.courseDetails;
+  const [CreateQuizViewOpen, setCreateQuizViewOpen] = useState<boolean>(false);
+  const {courseDetails: {posts}} = props;
   return (
     <div className='dashboard'>
+      <CreateQuizModal
+        open={CreateQuizViewOpen}
+        setOpen={setCreateQuizViewOpen}
+        courseID={props.courseDetails.id}
+      />
       <Container fluid>
         <Row>
           {Array<QuizTime>('past', 'current', 'upcoming').map((time: QuizTime, idx: number) => (
@@ -49,9 +66,20 @@ const QuizListView: React.FC<Props> = (props: Props) => {
             </Col>
           ))}
         </Row>
+        <Row>
+          <Button
+            className='mt-3 ml-auto mr-auto button primary-gradient shadow'
+            onClick={() => setCreateQuizViewOpen(true)}
+          >
+            <FontAwesomeIcon icon='plus' color='white' className='ml-1 mr-2' />
+            Create a new quiz
+          </Button>
+        </Row>
       </Container>
     </div>
   );
 };
 
 export default QuizListView;
+
+
