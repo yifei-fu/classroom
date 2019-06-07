@@ -42,23 +42,6 @@ class JoinCourseView extends React.Component<JoinCourseViewProps, JoinCourseView
                         <Card.Subtitle>ID: <b>{this.props.id}</b> </Card.Subtitle>
                         <br></br>
                         <br></br>
-                        {/* <Form onSubmit={(e:any) => this.handleSubmit(e)} validated={this.state.validated} noValidate>
-                                <Form.Group controlId='joinClassSecret' >
-                                    <div style={{ display: 'flex', justifyContent: 'left' }}>
-                                        <Form.Label>Enter code to join:</Form.Label>
-                                    </div>
-                                    <InputGroup>
-                                    <Form.Control type='text' placeholder='Code' onChange={(e: any) => this.handleChange(e)} required/>
-                                        <Form.Control.Feedback type="invalid">
-                                            Please provide a valid city.
-                                        </Form.Control.Feedback>
-                                    </InputGroup>
-                                </Form.Group>
-                            <Button variant='primary' type='submit' >
-                                Join class
-                            </Button>
-                        </Form> */}
-
                         <Form
                             noValidate
                             validated={this.state.validated}
@@ -98,18 +81,20 @@ class JoinCourseView extends React.Component<JoinCourseViewProps, JoinCourseView
         event.preventDefault();
         event.stopPropagation();
         this.setState({ validated: true });
-        console.log(joinSecret);
          if (joinSecret !== undefined && joinSecret !== ' ') {
             var requestBody: EnrollCourseRequestBody = { joinSecret: joinSecret };
 
             // carry out PUT request to see if it's the correct enrollment key
             try {
+                console.log("Trying!");
                 APIManager.enrollCourse(this.props.id, requestBody).then(() => {
                     console.log("Enrolled in class");
+                    this.props.history.push(`/course/${this.props.id}`);
                 });
-                // navigate out of here
+                //this.props.history.push(`/course/${this.props.id}`);
             }
             catch {
+                console.log("Failed!");
                 alert('Invalid join code.');
             }
         }
