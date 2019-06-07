@@ -595,6 +595,120 @@ export const sampleCourseDetails: CourseDetails = {
 
     {
       id: 'id',
+      name: 'Quiz for 6/10',
+      questions: [
+        {
+          title: 'Agree or disagree: Developers should strongly prefer inheritance to delegation.',
+          text: '',
+          responseType: 'choices',
+          responseChoices: [
+            'Agree',
+            'Disagree',
+            'I do not know',
+          ],
+        },
+        {
+          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
+          text: '',
+          responseType: 'string',
+        },
+        {
+          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
+          text: '',
+          responseType: 'string',
+        },
+      ],
+      startTime: 'Fri June 8 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri June 8 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
+      openToRoles: [
+        'TA',
+        'student',
+      ],
+      resultVisibleToRoles: [
+        'TA',
+        'student',
+      ],
+      secret: 'pass',
+    },
+
+    {
+      id: 'id',
+      name: 'Quiz for 6/15',
+      questions: [
+        {
+          title: 'Agree or disagree: Developers should strongly prefer inheritance to delegation.',
+          text: '',
+          responseType: 'choices',
+          responseChoices: [
+            'Agree',
+            'Disagree',
+            'I do not know',
+          ],
+        },
+        {
+          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
+          text: '',
+          responseType: 'string',
+        },
+        {
+          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
+          text: '',
+          responseType: 'string',
+        },
+      ],
+      startTime: 'Fri June 8 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri June 8 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
+      openToRoles: [
+        'TA',
+        'student',
+      ],
+      resultVisibleToRoles: [
+        'TA',
+        'student',
+      ],
+      secret: 'pass',
+    },
+
+    {
+      id: 'id',
+      name: 'Quiz for 6/17',
+      questions: [
+        {
+          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
+          text: '',
+          responseType: 'choices',
+          responseChoices: [
+            'Agree',
+            'Disagree',
+            'I do not know',
+          ],
+        },
+        {
+          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
+          text: '',
+          responseType: 'string',
+        },
+        {
+          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
+          text: '',
+          responseType: 'string',
+        },
+      ],
+      startTime: 'Fri June 7 2019 15:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri June 7 2019 15:00:05 GMT-0700 (Pacific Daylight Time)',
+      openToRoles: [
+        'TA',
+        'student',
+      ],
+      resultVisibleToRoles: [
+        'TA',
+        'student',
+      ],
+      secret: 'pass',
+    },
+
+    {
+      id: 'id',
       name: 'Quiz for 6/7',
       questions: [
         {
@@ -668,7 +782,45 @@ export const sampleCourseDetails: CourseDetails = {
       ],
       secret: 'pass',
     },
-    
+
+    {
+      id: 'id',
+      name: 'Quiz for 6/7',
+      questions: [
+        {
+          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
+          text: '',
+          responseType: 'choices',
+          responseChoices: [
+            'Agree',
+            'Disagree',
+            'I do not know',
+          ],
+        },
+        {
+          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
+          text: '',
+          responseType: 'string',
+        },
+        {
+          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
+          text: '',
+          responseType: 'string',
+        },
+      ],
+      startTime: 'Fri June 7 2019 15:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri June 7 2019 15:00:05 GMT-0700 (Pacific Daylight Time)',
+      openToRoles: [
+        'TA',
+        'student',
+      ],
+      resultVisibleToRoles: [
+        'TA',
+        'student',
+      ],
+      secret: 'pass',
+    },
+
   ],
   enrolledUsers: [
     {
