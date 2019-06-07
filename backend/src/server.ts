@@ -15,6 +15,7 @@ import {UserProfile} from './entity/UserProfile';
 import {QuizResponse} from './entity/QuizResponse';
 import {Quiz} from './entity/Quiz';
 import {Question} from './entity/Question';
+import {CourseDetails} from './entity/CourseDetails';
 
 // Import Controllers
 import {CourseController} from './controllers/course';
@@ -30,7 +31,7 @@ const auth = authentication.auth();
 
 const options: ConnectionOptions = {
     type: 'mongodb',
-    entities: [User, UserProfile, Course, Quiz, Question, QuizResponse],
+    entities: [User, UserProfile, Course, Quiz, Question, QuizResponse, CourseDetails],
 };
 
 function PopulateDatabase(connection: Connection) {
@@ -104,7 +105,10 @@ app.get('/user/logout', urlencodedParser, UserController.logout);
 // ===================================================
 app.get('/courses', CourseController.listCourses);
 
-// Get Course by name
+// Get course details
+app.get('/course/:id/details', CourseController.getCourseDetails);
+
+// Get Course by id
 app.get('/course/:id', urlencodedParser, CourseController.getCourse);
 
 // Creat Course

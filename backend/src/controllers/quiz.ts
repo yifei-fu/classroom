@@ -6,6 +6,7 @@ import {AuthController} from './auth'
 import {Course} from '../entity/Course';
 import {QuizResponse} from '../entity/QuizResponse';
 import {UserProfile} from '../entity/UserProfile';
+import { CourseDetails } from '../entity/CourseDetails';
 const config: Config = require('../config.json')
 
 export class QuizController {
@@ -43,9 +44,9 @@ export class QuizController {
 
                         console.log(newQuiz)
 
-                        const result = await getMongoManager().insertOne(Quiz, newQuiz);
+                        const result = await getMongoManager().save(Quiz, newQuiz);
                         
-                        const quizID = result.ops[0]._id
+                        const quizID = result.id
                         questions.forEach(async question => {
                             const q = await getMongoManager()
                             .findOneAndUpdate(Quiz,
@@ -54,6 +55,19 @@ export class QuizController {
                         });
 
                         const quiz = await getMongoManager().findOne(Quiz, quizID)
+
+                        console.log(quiz)
+
+                        await getMongoManager().findOneAndUpdate(
+                            CourseDetails,
+                            {courseID: String(courseID)},
+                            {$push: {quizzes: quiz}})
+
+                        const details = await getMongoManager().findOne(
+                            CourseDetails,
+                            {courseID: String(courseID)}
+                        )
+                        console.log(details)
                         res.json(quiz)
                     } else {
                         return res.status(401).send('User is not an instructor')
@@ -106,7 +120,7 @@ export class QuizController {
                 }
 
                 const newResponse = await getMongoManager().create(QuizResponse, {
-                    quizId: quizID,
+                    quizId: String(quizID),
                     user: profile,
                     responses
                 });
@@ -195,7 +209,7 @@ export class QuizController {
                             return res.status(404).send('Quiz id is invalid')
                         }
 
-                        const responses = await getMongoManager().find(QuizResponse, {quizId: quizID})
+                        const responses = await getMongoManager().find(QuizResponse, {quizId: String(quizID)})
 
                         if (!responses) {
                             return res.statys(404).send('No responses found')

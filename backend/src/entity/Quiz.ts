@@ -7,8 +7,8 @@ export class Quiz {
     @ObjectIdColumn()
     public id: ObjectID;
 
-    @ObjectIdColumn()
-    public courseID: ObjectID;
+    @Column()
+    public courseID: string;
 
     @Column()
     public name: string;

@@ -7,8 +7,8 @@ export class QuizResponse {
     @ObjectIdColumn()
     public id: ObjectID;
 
-    @ObjectIdColumn()
-    public quizId: ObjectID;
+    @Column()
+    public quizId: string;
 
     @Column((type) => UserProfile)
     public user: UserProfile;

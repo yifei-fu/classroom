@@ -4,6 +4,7 @@ import {ObjectID} from 'mongodb'
 /* Entities */
 import {Course} from '../entity/Course';
 import {User} from '../entity/User'
+import {CourseDetails} from '../entity/CourseDetails';
 
 /* Auth */
 // Import authentication controller
@@ -33,6 +34,22 @@ export class CourseController {
         .catch((err) => {
             console.log(err)
         })
+    }
+
+    public static async getCourseDetails(req, res) {
+        const id = toObjectId(req.params.id);
+
+        if(!id) {
+            return res.status(400).send('Course id parameter not found')
+        }
+
+        const course = await getMongoManager().findOne(Course, id)
+        if(!course) {
+            return res.status(404).send('Course with that id does not exist')
+        }
+        
+        const courseDetails = await getMongoManager().findOne(CourseDetails, {courseID: String(id)})
+        res.json(courseDetails)
     }
 
     public static async listCourses(req, res) {
@@ -94,29 +111,29 @@ export class CourseController {
         console.log('studentJoinSecret is', studentJoinSecret)
         console.log('TAJoinSecret is', TAJoinSecret)
 
-        const newCourse = {
+        const newCourse = await getMongoManager().create(Course, {
             name,
             school,
             term,
             studentJoinSecret,
             TAJoinSecret,
+            enrolledUsers: new Array(),
             instructors: new Array(),
-            enrolledUsers: new Array()
-        };
+        });
 
-        const course = await getMongoManager().insertOne(Course, newCourse)
-        console.log(course.ops[0])
+        const course: Course = await getMongoManager().save(Course, newCourse)
+        console.log(course.id)
         const s1 = await getMongoManager()
         .findOneAndUpdate(
             User,
             {_id: user.id},
-            {$push: {enrolledCourses: course.ops[0]._id}})
+            {$push: {enrolledCourses: course.id}})
 
         const s2 = await getMongoManager()
         .findOneAndUpdate(
             UserProfile,
             {uid: user.uid},
-            {$push: {enrolledCourses: course.ops[0]._id}})
+            {$push: {enrolledCourses: course.id}})
 
         const profile = await getMongoManager().findOne(UserProfile, {uid: user.uid})
         console.log(profile)
@@ -124,10 +141,31 @@ export class CourseController {
         await getMongoManager()
         .findOneAndUpdate(
             Course,
-            {_id: course.ops[0]._id},
+            {_id: course.id},
             {$push: {enrolledUsers: profile, instructors: profile}})
 
-        const result = await getMongoManager().findOne(Course, course.ops[0].id)
+        const result = await getMongoManager().findOne(Course, course.id)
+
+        const courseDetails = getMongoManager().create(CourseDetails, {
+            courseID: String(result.id),
+            name: result.name,
+            description: 'Cool and exciting class',
+            school: result.school,
+            term: result.term,
+            studentJoinSecret: result.studentJoinSecret,
+            TAJoinSecret: result.TAJoinSecret,
+            enrolledUsers: new Array(),
+            instructors: new Array(),
+            quizzes: new Array()
+        });
+
+        courseDetails.enrolledUsers = result.enrolledUsers
+        courseDetails.instructors = result.instructors
+        courseDetails.quizzes = []
+
+        const details = await getMongoManager().save(CourseDetails, courseDetails)
+        console.log(details)
+
         return res.json(result)
     }
 
@@ -178,7 +216,7 @@ export class CourseController {
                 return res.status(400).send("TA is already enrolled")
             }
 
-            const s1 = await getMongoManager()
+            await getMongoManager()
             .findOneAndUpdate(
                 User, 
                 {_id: user.id},
@@ -193,22 +231,31 @@ export class CourseController {
 
             console.log("TAProfile:", TAProfile)
 
-            const s2 = await getMongoManager()
+            await getMongoManager()
             .findOneAndUpdate(
                 Course,
                 {_id: course.id},
-                {$push: {instructors: TAProfile}})
+                {$push: {instructors: TAProfile, enrolledUsers: TAProfile}})
             .catch(err => {
                 console.log(err)
                 res.status(400).send(err)
             });
-
-            const s3 = await getMongoManager()
-            .findOneAndUpdate(
-                Course,
-                {_id: course.id},
-                {$push: {enrolledUsers: TAProfile}})
     
+            await getMongoManager()
+            .findOneAndUpdate(
+                CourseDetails,
+                {courseID: String(course.id)},
+                {$push: {instructors: TAProfile, enrolledUsers: TAProfile}}
+            )
+
+            const details = await getMongoManager()
+            .findOne(
+                CourseDetails,
+                {courseID: String(course.id)}
+            )
+
+            console.log('Details:', details)
+
             return res.status(200).send("Instructor added successfully.")
 
         } else {
@@ -231,7 +278,7 @@ export class CourseController {
                 return res.status(400).send("User is already enrolled")
             }
 
-            const s1 = await getMongoManager()
+            await getMongoManager()
             .findOneAndUpdate(
                 User, 
                 {_id: user.id},
@@ -244,9 +291,9 @@ export class CourseController {
             const profile = await getMongoManager()
             .findOne(UserProfile, {uid: user.uid});
 
-            console.log("TAProfile:", profile)
+            console.log("Profile:", profile)
 
-            const s2 = await getMongoManager()
+            await getMongoManager()
             .findOneAndUpdate(
                 Course,
                 {_id: course.id},
@@ -256,6 +303,13 @@ export class CourseController {
                 res.status(400).send(err)
             });
     
+            await getMongoManager()
+            .findOneAndUpdate(
+                CourseDetails,
+                {courseID: String(course.id)},
+                {$push: {enrolledUsers: profile}}
+            )
+
             return res.status(200).send("User enrolled successfully.")
         }
     }
