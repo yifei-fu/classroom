@@ -46,7 +46,11 @@ function createNotification() {
     setTimeout(function () {
         var img = 'https://banner2.kisspng.com/20180318/xse/kisspng-book-cartoon-royalty-free-clip-art-hand-painted-open-book-5aae50281fbb54.51412376152137322413.jpg';
         var text = 'COM SCI 130 has a new quiz ready for you';
-        return new Notification('Inquizitive', { body: text, icon: img });
-    }, 30000);
+        var notification = new Notification('Inquizitive', { body: text, icon: img });
+        notification.onclick = function(event) {
+            event.preventDefault();
+            window.open("/dashboard");
+        }
+    }, 10000);
 }
 
