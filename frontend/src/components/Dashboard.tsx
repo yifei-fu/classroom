@@ -1,13 +1,14 @@
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { History } from 'history';
 import React, {useEffect, useState} from 'react';
-import {Card, Col, Container, ListGroup, Row} from 'react-bootstrap';
+import {Button, Card, Col, Container, ListGroup, Row} from 'react-bootstrap';
 import {RouteComponentProps, withRouter } from 'react-router';
 import APIManager from '../api/APIManager';
 import {Course} from '../api/type';
+import '../common.css';
 import Avatar from './Avatar';
 import CardContainer from './CardContainer';
-
-import '../common.css';
+import CreateCourseModal from './CreateCourseModal';
 import './Dashboard.css';
 
 function renderCourse(history: History, course: Course, index: number): React.ReactNode {
@@ -30,6 +31,7 @@ interface Props extends RouteComponentProps {
 
 const Dashboard: React.FC<Props> = (props: Props) => {
     const [courses, setCourses] = useState<Course[]>([]);
+    const [createCourseModalOpen, setCreateCourseModalOpen] = useState<boolean>(false);
     const {history} = props;
     useEffect(() => {
         APIManager.getEnrolledCourses().then((data) => {
@@ -37,33 +39,24 @@ const Dashboard: React.FC<Props> = (props: Props) => {
         });
     }, []);
     return (
-        <div className='dashboard'>
-            <h1 className='display-4'>Dashboard</h1>
-            <Container fluid>
-                <Row>
-                    <Col xs={12} md={6} lg={4}>
-                        <CardContainer title='Courses'>
-                            <ListGroup variant='flush'>
-                                {courses.map((course, idx) => renderCourse(history, course, idx))}
-                            </ListGroup>
-                        </CardContainer>
-                    </Col>
-                    <Col xs={12} md={6} lg={4}>
-                        <CardContainer title='Upcoming Quizzes'>
-                            <div className='courses-container'>
-                                List of Quiz
-                            </div>
-                        </CardContainer>
-                    </Col>
-                    <Col xs={12} md={6} lg={4}>
-                        <CardContainer title='Recent Discussion'>
-                            <div className='courses-container'>
-                                List of Post
-                            </div>
-                        </CardContainer>
-                    </Col>
-                </Row>
-            </Container>
+        <div className='dashboard main-content'>
+          <CreateCourseModal
+            open={createCourseModalOpen}
+            setOpen={setCreateCourseModalOpen}
+          />
+          <h1 className='display-4'>Dashboard</h1>
+          <CardContainer title='Courses'>
+            <ListGroup variant='flush'>
+              {courses.map((course, idx) => renderCourse(history, course, idx))}
+            </ListGroup>
+          </CardContainer>
+          <Button
+            className='mt-3 ml-auto mr-auto button primary-gradient shadow'
+            onClick={() => setCreateCourseModalOpen(true)}
+          >
+            <FontAwesomeIcon icon='plus' color='white' className='ml-1 mr-2' />
+            Create a New Course
+          </Button>
         </div>
     );
 };

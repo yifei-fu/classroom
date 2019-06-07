@@ -8,3 +8,9 @@
 .course-text {
     width: 70%;
 }
+
+.main-content {
+    display: flex;
+    max-width: 750px;
+    padding: 20px;
+}
