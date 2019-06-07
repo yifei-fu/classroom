@@ -5,6 +5,8 @@ export interface UserProfile {
     firstName: string;
     lastName: string;
     role: Role;
+    email?: string;
+    uid?: string;
 }
 
 export interface Course {
@@ -17,6 +19,7 @@ export interface Course {
     instructor: UserProfile;
     studentJoinSecret?: string;
     TAJoinSecret?: string;
+    enrolledUsers: UserProfile[];
 }
 
 export interface CourseUsers {
@@ -90,6 +93,11 @@ export interface UserSignUpRequestBody {
     lastName: string;
     isInstructor: boolean;
     uid: string;
+}
+
+export interface UserSignInRequestBody {
+    username: string;
+    password: string;
 }
 
 export interface CreatePostRequestBody {

@@ -12,6 +12,7 @@ export const sampleCourseDetails: CourseDetails = {
     username: 'eggert',
     firstName: 'Paul',
     lastName: 'Eggert',
+    email: 'eggert@ucla.edu',
     role: 'instructor',
   },
   studentJoinSecret: '5srs',
@@ -31,7 +32,7 @@ export const sampleCourseDetails: CourseDetails = {
         lastName: 'B',
         role: 'student',
       },
-      creationTime: 'Fri May 24 2019 16:36:30 GMT-0700 (Pacific Daylight Time)',
+      creationTime: 'May 14 2019 16:36:30 GMT-0700 (Pacific Daylight Time)',
       comments: [
         {
           content: 'On CCLE it says next Friday.',
@@ -253,6 +254,16 @@ export const sampleCourseDetails: CourseDetails = {
         'student',
       ],
       secret: 'pass',
+    },
+  ],
+  enrolledUsers: [
+    {
+      firstName: 'Yifei',
+      lastName: 'Fu',
+      uid: '5930492943',
+      email: 'yf@g.com',
+      username: 'xiazz',
+      role: 'student',
     },
   ],
 };
