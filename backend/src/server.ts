@@ -120,7 +120,7 @@ app.put('/course/:id/enroll', urlencodedParser, CourseController.enrollCourse);
 // API endpoints for Quiz
 // ===================================================
 // Get the user's response of a quiz
-app.get('/course/:courseID/quiz/:quizID/response', urlencodedParser, QuizController.getQuizeResponse);
+app.get('/course/:courseID/quiz/:quizID/response', urlencodedParser, QuizController.getQuizResponse);
 
 // Get all responses of a quiz
 app.get('/course/:courseID/quiz/:quizID/responses', urlencodedParser, QuizController.getQuizResponses);

@@ -43,27 +43,23 @@ export class QuizController {
 
                         console.log(newQuiz)
 
-                        questions.forEach(async question=> {
-                            const newQuestion: Question = await getMongoManager().create(Question, {
-                                title: question.title,
-                                text: question.text,
-                                responseType: question.responseType,
-                                responseChoices: question.responseChoices
-                            });
-
-                            const q = await getMongoManager().save(Question, newQuestion)
-                            console.log(q)
-                            newQuiz.questions.push(q.id)
+                        const result = await getMongoManager().insertOne(Quiz, newQuiz);
+                        
+                        const quizID = result.ops[0]._id
+                        questions.forEach(async question => {
+                            const q = await getMongoManager()
+                            .findOneAndUpdate(Quiz,
+                                {_id: quizID},
+                                {$push: {questions: question}})
                         });
 
-                        const result = await getMongoManager().save(Quiz, newQuiz);
-                        console.log(result)
-                        res.status(200).send('Quiz created')
+                        const quiz = await getMongoManager().findOne(Quiz, quizID)
+                        res.json(quiz)
                     } else {
-                        res.status(401).send('User is not an instructor')
+                        return res.status(401).send('User is not an instructor')
                     }
                 } else {
-                    res.status(401).send('Invalid auth token')
+                    return res.status(401).send('Invalid auth token')
                 }
             } catch (err) {
                 console.log(err)
@@ -79,16 +75,16 @@ export class QuizController {
             try {
                 const user = await AuthController.VerifyToken(token)
                 if (!user) {
-                    res.status(401).send('Invalid auth token')
+                    return res.status(401).send('Invalid auth token')
                 }
                 const profile = await getMongoManager().findOne(UserProfile, {uid: user.uid})
                 if (!profile) {
-                    res.status(401).send('UserProfile does not exists')
+                    return res.status(401).send('UserProfile does not exists')
                 }
 
                 const {responses} = req.body
                 if (!responses) {
-                    res.status(400).send('Required parameters not found')
+                    return res.status(400).send('Required parameters not found')
                 }
 
                 const courseID = req.params.courseID 
@@ -98,11 +94,15 @@ export class QuizController {
                 const quiz = await getMongoManager().findOne(Quiz, quizID)
 
                 if (!course) {
-                    res.status(404).send('Course ID is inavlid')
+                    return res.status(404).send('Course ID is inavlid')
                 }
 
                 if (!quiz) {
-                    res.status(404).send('Quiz ID is invalid')
+                    return res.status(404).send('Quiz ID is invalid')
+                }
+                const exsitingResponse = await getMongoManager().findOne(QuizResponse, {user: profile})
+                if (exsitingResponse) {
+                    return res.status(404).send('User has already responded')
                 }
 
                 const newResponse = await getMongoManager().create(QuizResponse, {
@@ -113,6 +113,7 @@ export class QuizController {
 
                 const result = await getMongoManager().save(QuizResponse, newResponse);
                 console.log(result)
+
                 res.status(200).send('QuizResponse received')
 
             } catch(err) {
@@ -124,18 +125,18 @@ export class QuizController {
         }
     }
 
-    public static async getQuizeResponse(req, res) {
+    public static async getQuizResponse(req, res) {
         const token = req.body.token || req.headers['token'] || req.headers['x-access-token'];
         if (token) {
             try {
                 const user = await AuthController.VerifyToken(token)
                 if (!user) {
-                    res.status(401).send('Invalid auth token')
+                    return res.status(401).send('Invalid auth token')
                 }
 
                 const profile = await getMongoManager().findOne(UserProfile, {uid: user.uid})
                 if (!profile) {
-                    res.status(401).send('UserProfile does not exists')
+                    return res.status(401).send('UserProfile does not exists')
                 }
 
                 const courseID = req.params.courseID 
@@ -153,18 +154,14 @@ export class QuizController {
                     return res.status(404).send('Quiz ID is invalid')
                 }
 
-                const responses = await getMongoManager().find(QuizResponse, {quizId: quizID});
-                if (!responses) {
+                const response = await getMongoManager()
+                .findOne(QuizResponse,
+                    {user: profile});
+                if (!response) {
                     return res.status(404).send('User has not submitted any responses')
                 }
 
-                let result = new Array()
-                responses.forEach((response) => {
-                    result.push(response.responses)
-                })
-
-                return res.json(result)
-
+                return res.json(response)
             } catch (err) {
                 console.log(err)
                 return res.status(400).send('Something bad happened')

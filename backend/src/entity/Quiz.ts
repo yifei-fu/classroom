@@ -13,8 +13,8 @@ export class Quiz {
     @Column()
     public name: string;
 
-    @Column()
-    public questions: ObjectID[];
+    @Column((type) => Question)
+    public questions: Question[];
 
     @Column()
     public startTime: string;
