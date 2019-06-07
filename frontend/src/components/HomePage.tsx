@@ -23,7 +23,8 @@ const HomePage: React.FC<Props> = (props: Props) => {
                 className='button'
                 variant='outline-light'
                 size='lg'
-                onClick={() => history.push('/dashboard')}
+                //onClick={() => history.push('/dashboard')}
+                onClick={() => history.push('/mainpage')}
             >
                 Launch
             </Button>
