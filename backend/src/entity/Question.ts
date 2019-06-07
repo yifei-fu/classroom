@@ -1,10 +1,6 @@
-import {Column, ObjectIdColumn, ObjectID, Entity} from 'typeorm';
+import {Column} from 'typeorm';
 
-@Entity()
 export class Question {
-    @ObjectIdColumn()
-    public id: ObjectID;
-
     @Column()
     public title: string;
 
@@ -16,5 +12,12 @@ export class Question {
 
     @Column()
     public responseChoices: string[];
+
+    constructor(title: string, text: string, responseType: string, responseChoices: string[]) {
+        this.title = title;
+        this.text = text;
+        this.responseChoices = responseChoices;
+        this.responseType = responseType;
+    }
 }
 
