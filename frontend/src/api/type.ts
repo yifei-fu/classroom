@@ -99,7 +99,7 @@ export interface CreatePostRequestBody {
 }
 
 export interface CreateQuizRequestBody {
-    /*
+    
     title1: string;
     answer1: string;
     content1: string;
@@ -111,8 +111,7 @@ export interface CreateQuizRequestBody {
     title3: string;
     answer3: string;
     content3: string;
-    */
-
+    
     title: string;
     tags: string[];
     content: string;
