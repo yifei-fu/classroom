@@ -12,19 +12,25 @@ import {Connection, ConnectionOptions, createConnection, getMongoManager} from '
 import {Course} from './entity/Course';
 import {User} from './entity/User';
 import {UserProfile} from './entity/UserProfile';
+import {QuizResponse} from './entity/QuizResponse';
+import {Quiz} from './entity/Quiz';
+import {Question} from './entity/Question';
 
 // Import Controllers
 import {CourseController} from './controllers/course';
 import {UserController} from './controllers/user';
 import {UserProfileController} from './controllers/userprofile';
+import {QuizController} from './controllers/quiz';
+
 
 // get configurations from environment variables
 const port: number = Number(process.env.PORT) || 8080;
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
+const auth = authentication.auth();
 
 const options: ConnectionOptions = {
     type: 'mongodb',
-    entities: [User, UserProfile, Course],
+    entities: [User, UserProfile, Course, Quiz, Question, QuizResponse],
 };
 
 function PopulateDatabase(connection: Connection) {
@@ -109,6 +115,24 @@ app.get('/course/:id/users', urlencodedParser, CourseController.getProfiles);
 
 // Enroll a user in a course
 app.put('/course/:id/enroll', urlencodedParser, CourseController.enrollCourse);
+
+// ===================================================
+// API endpoints for Quiz
+// ===================================================
+// Get the user's response of a quiz
+app.get('/course/:courseID/quiz/:quizID/response', urlencodedParser, QuizController.getQuizeResponse);
+
+// Get all responses of a quiz
+app.get('/course/:courseID/quiz/:quizID/responses', urlencodedParser, QuizController.getQuizResponses);
+
+// Create a quiz in a course. The user must be the instructor.
+app.post('/course/:courseID/quiz', urlencodedParser, QuizController.createQuiz);
+
+// Submit the user's response of a quiz
+app.post('/course/:courseID/quiz/:quizID/response', urlencodedParser, QuizController.submitQuizResponse);
+
+// Add qui to question
+app.post('/course/:courseID/quiz/add', urlencodedParser, QuizController.addQuestionToQuiz);
 
 // start Express app
 app.listen(port, () => {

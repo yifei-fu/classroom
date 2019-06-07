@@ -172,9 +172,6 @@ export class CourseController {
                 res.status(400).send(err)
             });
     
-            // console.log(s1)
-            // console.log(s2)
-    
             return res.status(200).send("Instructor added successfully.")
 
         } else {
@@ -216,9 +213,6 @@ export class CourseController {
                 console.log(err)
                 res.status(400).send(err)
             });
-    
-            // console.log(s1)
-            // console.log(s2)  
     
             return res.status(200).send("User enrolled successfully.")
         }
