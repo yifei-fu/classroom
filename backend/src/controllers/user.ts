@@ -43,9 +43,9 @@ export class UserController {
     }
 
     public static async createUser(req, res) {
-        const {username, firstname, lastname, email, password, isInstructor, uid} = req.body
+        const {username, firstName, lastName, email, password, isInstructor, uid} = req.body
 
-        if (!username || !firstname || !lastname || !email || !password || !isInstructor || !uid) {
+        if (!username || !firstName || !lastName || !email || !password || !isInstructor || !uid) {
             res.status(400).send('Missing information');
             return;
         }
@@ -57,10 +57,12 @@ export class UserController {
                 const hash: string = crypto.createHmac('sha256', config.jwtSecret)
                 .update(password)
                 .digest('hex');
+
+                // Validate isInstructor
                 let instructorBool: boolean;
-                if (isInstructor == 'false'){
+                if (isInstructor == false){
                     instructorBool = false;
-                } else if (isInstructor == 'true'){
+                } else if (isInstructor == true){
                     console.log('Instructor detected')
                     instructorBool = true;
                 } else {
@@ -69,8 +71,8 @@ export class UserController {
 
                 const newUser = {
                     username,
-                    firstname,
-                    lastname,
+                    firstName,
+                    lastName,
                     email,
                     password: hash,
                     isInstructor: instructorBool,
