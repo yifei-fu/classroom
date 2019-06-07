@@ -50,7 +50,7 @@ export class CourseController {
                             delete course.TAJoinSecret
                             delete course.enrolledUsers
                         })
-                        res.json(courses)
+                        return res.json(courses)
                     })
                 } else {
                     res.status(403).send('Invalid auth token')
@@ -86,32 +86,49 @@ export class CourseController {
 
         let studentJoinSecret = ""
         let TAJoinSecret = ""
-        for (var i=0; i < 3; i++) {
-            studentJoinSecret += Math.random().toString(36).substring(2, 15)
-            TAJoinSecret += Math.random().toString(36).substring(2, 15)
+        for (var i=0; i <1; i++) {
+            studentJoinSecret += Math.random().toString(36).substring(8, 15)
+            TAJoinSecret += Math.random().toString(36).substring(8, 15)
         }
 
         console.log('studentJoinSecret is', studentJoinSecret)
         console.log('TAJoinSecret is', TAJoinSecret)
 
-        const profile = await getMongoManager().findOne(UserProfile, {uid: user.uid})
-        const course = {
+        const newCourse = {
             name,
             school,
             term,
             studentJoinSecret,
             TAJoinSecret,
-            instructors: [profile],
-            enrolledUsers: [profile],
+            instructors: new Array(),
+            enrolledUsers: new Array()
         };
 
-        try {
-            const result = await getMongoManager().insertOne(Course, course)
-            console.log(result.ops[0])
-            return res.json(result.ops[0])
-        } catch(err) {
-            console.log(err)
-        }
+        const course = await getMongoManager().insertOne(Course, newCourse)
+        console.log(course.ops[0])
+        const s1 = await getMongoManager()
+        .findOneAndUpdate(
+            User,
+            {_id: user.id},
+            {$push: {enrolledCourses: course.ops[0]._id}})
+
+        const s2 = await getMongoManager()
+        .findOneAndUpdate(
+            UserProfile,
+            {uid: user.uid},
+            {$push: {enrolledCourses: course.ops[0]._id}})
+
+        const profile = await getMongoManager().findOne(UserProfile, {uid: user.uid})
+        console.log(profile)
+
+        await getMongoManager()
+        .findOneAndUpdate(
+            Course,
+            {_id: course.ops[0]._id},
+            {$push: {enrolledUsers: profile, instructors: profile}})
+
+        const result = await getMongoManager().findOne(Course, course.ops[0].id)
+        return res.json(result)
     }
 
     public static async enrollCourse(req, res) {
@@ -142,18 +159,18 @@ export class CourseController {
 
         if (user.isInstructor == true) {
             if (course.TAJoinSecret != secret) {
-                return res.status(400).send('TASecret and Course ID do not match.')
+                return res.status(400).send('TASecret and Course ID do not match')
             }
             
             try {
                 user.enrolledCourses.forEach(element => {
                     if (String(element) == String(course.id)) {
-                        throw new Error()
+                        throw new Error('EnrolledCourses has course id')
                     }
                 });
                 course.instructors.forEach(element => {
                     if (element.uid == user.uid) {
-                        throw new Error()
+                        throw new Error('EnrolledUsers has user id')
                     }
                 });
             } catch (err) {
@@ -251,19 +268,8 @@ export class CourseController {
             if (!course) {
                 return res.status(400).send('Invalid course id')
             }
-            const users = course.enrolledUsers
-            getMongoManager().findByIds(User, users)
-                .then((docs)=>{
-                    if (docs) {
-                    docs.forEach(user => {
-                        delete user.password
-                        delete user.username
-                        delete user.uid
-                    });
-                    return res.json(docs)
-                    }
-                })
-        });
+            return res.json(course.enrolledUsers)
+            })
     }
 
     public static async getCourseBySecret(secret: string) {
