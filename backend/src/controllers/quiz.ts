@@ -29,25 +29,31 @@ export class QuizController {
                         if (!course) {
                             return res.status(400).send('Course id is invalid')
                         }
+                        console.log(questions)
+                        // let newQuestions: Question[] = new Array<Question>();
 
-                        let newQuestions: Question[];
-                        questions.forEach(question=> {
-                                
-                            const newQuestion: Question = getMongoManager().create(Question, {
+                        const newQuiz: Quiz = await getMongoManager().create(Quiz, {
+                            name,
+                            startTime,
+                            endTime,
+                            secret,
+                            courseID,
+                            questions: new Array()
+                        });
+
+                        console.log(newQuiz)
+
+                        questions.forEach(async question=> {
+                            const newQuestion: Question = await getMongoManager().create(Question, {
                                 title: question.title,
                                 text: question.text,
                                 responseType: question.responseType,
                                 responseChoices: question.responseChoices
                             });
-                            newQuestions.push(newQuestion)
-                        });
-                        
-                        const newQuiz: Quiz = getMongoManager().create(Quiz, {
-                            name,
-                            startTime,
-                            endTime,
-                            secret,
-                            questions: newQuestions
+
+                            const q = await getMongoManager().save(Question, newQuestion)
+                            console.log(q)
+                            newQuiz.questions.push(q.id)
                         });
 
                         const result = await getMongoManager().save(Quiz, newQuiz);
