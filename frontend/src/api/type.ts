@@ -16,7 +16,7 @@ export interface Course {
     term: string;
     role: Role;
     description?: string;
-    instructor: UserProfile;
+    instructors: UserProfile[];
     studentJoinSecret?: string;
     TAJoinSecret?: string;
     enrolledUsers: UserProfile[];
@@ -32,6 +32,7 @@ export interface Question {
     text: string;
     responseType: 'choices' | 'number' | 'string';
     responseChoices?: string[];
+    responses?: QuestionResponse[];
 }
 
 export interface Quiz {
@@ -45,11 +46,9 @@ export interface Quiz {
     secret?: string;
 }
 
-export interface QuizResponse {
-    id?: string;
-    quizId: string;
+export interface QuestionResponse {
     user?: UserProfile;
-    responses: Array<string | number>;
+    value: string | number;
 }
 
 export interface Comment {
@@ -107,23 +106,10 @@ export interface CreatePostRequestBody {
 }
 
 export interface CreateQuizRequestBody {
-    
-    title1: string;
-    answer1: string;
-    content1: string;
-    
-    title2: string;
-    answer2: string;
-    content2: string;
-
-    title3: string;
-    answer3: string;
-    content3: string;
-    
-    title: string;
-    tags: string[];
-    content: string;
-    answer: string;
+    name: string;
+    questions: Question[];
+    startTime: string;
+    endTime: string;
 }
 
 export interface CreateCommentRequestBody {

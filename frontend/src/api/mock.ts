@@ -2,24 +2,24 @@
 import {CourseDetails} from './type';
 
 export const sampleCourseDetails: CourseDetails = {
-  id: 'id',
+  id: '5cfaab1710bdd34128453910',
   role: 'student',
-  name: 'CS130 - Software Engineering',
+  name: 'COMSCI 130 - Software Engineering',
   description: 'Structured programming, program specification, program proving, modularity, abstract data types, composite design, software tools, software control systems, program testing, team programming.',
   school: 'UCLA',
   term: 'Spring 2019',
-  instructor: {
+  instructors: [{
     username: 'eggert',
     firstName: 'Paul',
     lastName: 'Eggert',
     email: 'eggert@ucla.edu',
     role: 'instructor',
-  },
+  }],
   studentJoinSecret: '5srs',
   TAJoinSecret: '50avg',
   posts: [
     {
-      id: 'id',
+      id: '0',
       title: 'The final presentation date',
       tags: [
         'Project',
@@ -77,7 +77,7 @@ export const sampleCourseDetails: CourseDetails = {
       ],
     },
     {
-      id: 'id',
+      id: '1',
       title: 'Davis’s OH Today? Which room?',
       tags: [
         'TA',
@@ -105,7 +105,7 @@ export const sampleCourseDetails: CourseDetails = {
       ],
     },
     {
-      id: 'id',
+      id: '2',
       title: 'Final Report -- Pending Tasks',
       tags: [
         'Project',
@@ -133,7 +133,7 @@ export const sampleCourseDetails: CourseDetails = {
       ],
     },
     {
-      id: 'id',
+      id: '3',
       title: 'Question about final presentation',
       tags: [
         'Project',
@@ -161,7 +161,7 @@ export const sampleCourseDetails: CourseDetails = {
       ],
     },
     {
-      id: 'id',
+      id: '4',
       title: '"How Amazon Web Services Uses Formal Methods" Article',
       tags: [
         'Reading',
@@ -188,7 +188,7 @@ export const sampleCourseDetails: CourseDetails = {
       ],
     },
     {
-      id: 'id',
+      id: '5',
       title: 'Midterm Report',
       tags: [
         'Project',
@@ -215,131 +215,12 @@ export const sampleCourseDetails: CourseDetails = {
         },
       ],
     },
-
     {
-      id: 'id',
-      title: 'The final presentation date',
-      tags: [
-        'Project',
-        'Final presentation',
-      ],
-      content: 'Is it confirmed that the presentation is on May 31st or June 7th? Thanks!',
-      author: {
-        username: 'Anonymous',
-        firstName: 'Anonymous',
-        lastName: ' ',
-        role: 'student',
-      },
-      creationTime: 'Fri June 7 2019 16:36:30 GMT-0700 (Pacific Daylight Time)',
-      comments: [
-        {
-          content: 'We will begin them on the 31st and continue into the 7th if needed, as we need time on the 7th to do a review for the final. The order would be randomly selected. For the Gzip and Juvenile court teams, they will be presenting in class Monday of week 10, as decided by Professor Eggert. The TAs are going to be discussing with Professor Eggert tomorrow to begin making the final earlier so we can begin final review this week so more teams can do final presentations next week instead.',
-          author: {
-            username: 'User',
-            firstName: 'Davis',
-            lastName: 'Cho',
-            role: 'TA',
-          },
-          creationTime: 'Fri May 24 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Compared to covering the materials of the last two lectures in the final review, it is much more preferable to do the presentations on Week 10.',
-          author: {
-            username: 'Anonymous',
-            firstName: 'Anonymous',
-            lastName: ' ',
-            role: 'student',
-          },
-          creationTime: 'Fri May 31 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Still think there is not enough time to finish the project in week 9. Really need another week to work on.',
-          author: {
-            username: 'Anonymous',
-            firstName: 'Anonymous',
-            lastName: ' ',
-            role: 'student',
-          },
-          creationTime: 'Fri May 17 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Feel free to bring this up with the professor tomorrow as he would likely listen to the students more than us lowly TAs :c We will also try to convince him as well',
-          author: {
-            username: 'User',
-            firstName: 'Davis',
-            lastName: 'Cho',
-            role: 'TA',
-          },
-          creationTime: 'Fri May 10 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-      ],
-    },
-
-    {
-      id: 'id',
-      title: 'The final presentation date',
-      tags: [
-        'Project',
-        'Final presentation',
-      ],
-      content: 'Is it confirmed that the presentation is on May 31st or June 7th? Thanks!',
-      author: {
-        username: 'Anonymous',
-        firstName: 'Anonymous',
-        lastName: ' ',
-        role: 'student',
-      },
-      creationTime: 'Fri June 7 2019 16:36:30 GMT-0700 (Pacific Daylight Time)',
-      comments: [
-        {
-          content: 'We will begin them on the 31st and continue into the 7th if needed, as we need time on the 7th to do a review for the final. The order would be randomly selected. For the Gzip and Juvenile court teams, they will be presenting in class Monday of week 10, as decided by Professor Eggert. The TAs are going to be discussing with Professor Eggert tomorrow to begin making the final earlier so we can begin final review this week so more teams can do final presentations next week instead.',
-          author: {
-            username: 'User',
-            firstName: 'Davis',
-            lastName: 'Cho',
-            role: 'TA',
-          },
-          creationTime: 'Fri May 24 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Compared to covering the materials of the last two lectures in the final review, it is much more preferable to do the presentations on Week 10.',
-          author: {
-            username: 'Anonymous',
-            firstName: 'Anonymous',
-            lastName: ' ',
-            role: 'student',
-          },
-          creationTime: 'Fri May 31 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Still think there is not enough time to finish the project in week 9. Really need another week to work on.',
-          author: {
-            username: 'Anonymous',
-            firstName: 'Anonymous',
-            lastName: ' ',
-            role: 'student',
-          },
-          creationTime: 'Fri May 17 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Feel free to bring this up with the professor tomorrow as he would likely listen to the students more than us lowly TAs :c We will also try to convince him as well',
-          author: {
-            username: 'User',
-            firstName: 'Davis',
-            lastName: 'Cho',
-            role: 'TA',
-          },
-          creationTime: 'Fri May 10 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-      ],
-    },
-
-    {
-      id: 'id',
+      id: '6',
       title: 'There are two links for submitting Midterm Presentations?',
       tags: [
         'Project',
-        'Midterm presentation'
+        'Midterm presentation',
       ],
       content: 'I see two links for midterm presentation submission, 1) "Week 16"/"Midterm Presentation Slides", 2) "Homework Assignments"/"Midterm presentation slides". It hass been noted that we should submit using option #2 (@97). Just want to make sure. ',
       author: {
@@ -362,130 +243,10 @@ export const sampleCourseDetails: CourseDetails = {
         },
       ],
     },
-
-    {
-      id: 'id',
-      title: 'The final presentation date',
-      tags: [
-        'Project',
-        'Final presentation',
-      ],
-      content: 'Is it confirmed that the presentation is on May 31st or June 7th? Thanks!',
-      author: {
-        username: 'Anonymous',
-        firstName: 'Anonymous',
-        lastName: ' ',
-        role: 'student',
-      },
-      creationTime: 'Fri June 7 2019 16:36:30 GMT-0700 (Pacific Daylight Time)',
-      comments: [
-        {
-          content: 'We will begin them on the 31st and continue into the 7th if needed, as we need time on the 7th to do a review for the final. The order would be randomly selected. For the Gzip and Juvenile court teams, they will be presenting in class Monday of week 10, as decided by Professor Eggert. The TAs are going to be discussing with Professor Eggert tomorrow to begin making the final earlier so we can begin final review this week so more teams can do final presentations next week instead.',
-          author: {
-            username: 'User',
-            firstName: 'Davis',
-            lastName: 'Cho',
-            role: 'TA',
-          },
-          creationTime: 'Fri May 24 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Compared to covering the materials of the last two lectures in the final review, it is much more preferable to do the presentations on Week 10.',
-          author: {
-            username: 'Anonymous',
-            firstName: 'Anonymous',
-            lastName: ' ',
-            role: 'student',
-          },
-          creationTime: 'Fri May 31 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Still think there is not enough time to finish the project in week 9. Really need another week to work on.',
-          author: {
-            username: 'Anonymous',
-            firstName: 'Anonymous',
-            lastName: ' ',
-            role: 'student',
-          },
-          creationTime: 'Fri May 17 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Feel free to bring this up with the professor tomorrow as he would likely listen to the students more than us lowly TAs :c We will also try to convince him as well',
-          author: {
-            username: 'User',
-            firstName: 'Davis',
-            lastName: 'Cho',
-            role: 'TA',
-          },
-          creationTime: 'Fri May 10 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-      ],
-    },
-
-    {
-      id: 'id',
-      title: 'The final presentation date',
-      tags: [
-        'Project',
-        'Final presentation',
-      ],
-      content: 'Is it confirmed that the presentation is on May 31st or June 7th? Thanks!',
-      author: {
-        username: 'Anonymous',
-        firstName: 'Anonymous',
-        lastName: ' ',
-        role: 'student',
-      },
-      creationTime: 'Fri June 7 2019 16:36:30 GMT-0700 (Pacific Daylight Time)',
-      comments: [
-        {
-          content: 'We will begin them on the 31st and continue into the 7th if needed, as we need time on the 7th to do a review for the final. The order would be randomly selected. For the Gzip and Juvenile court teams, they will be presenting in class Monday of week 10, as decided by Professor Eggert. The TAs are going to be discussing with Professor Eggert tomorrow to begin making the final earlier so we can begin final review this week so more teams can do final presentations next week instead.',
-          author: {
-            username: 'User',
-            firstName: 'Davis',
-            lastName: 'Cho',
-            role: 'TA',
-          },
-          creationTime: 'Fri May 24 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Compared to covering the materials of the last two lectures in the final review, it is much more preferable to do the presentations on Week 10.',
-          author: {
-            username: 'Anonymous',
-            firstName: 'Anonymous',
-            lastName: ' ',
-            role: 'student',
-          },
-          creationTime: 'Fri May 31 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Still think there is not enough time to finish the project in week 9. Really need another week to work on.',
-          author: {
-            username: 'Anonymous',
-            firstName: 'Anonymous',
-            lastName: ' ',
-            role: 'student',
-          },
-          creationTime: 'Fri May 17 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-        {
-          content: 'Feel free to bring this up with the professor tomorrow as he would likely listen to the students more than us lowly TAs :c We will also try to convince him as well',
-          author: {
-            username: 'User',
-            firstName: 'Davis',
-            lastName: 'Cho',
-            role: 'TA',
-          },
-          creationTime: 'Fri May 10 2019 17:00:00 GMT-0700 (Pacific Daylight Time)',
-        },
-      ],
-    },
-
   ],
-  
   quizzes: [
     {
-      id: 'id',
+      id: '1',
       name: 'Quiz for 5/15',
       questions: [
         {
@@ -497,58 +258,92 @@ export const sampleCourseDetails: CourseDetails = {
             'Disagree',
             'I do not know',
           ],
-        },
-        {
-          title: 'Please justify: For software reliability in an application like onboard communication and life-support software for the Deep Space Transport, N-version programming is overall more cost-effective than spending the same amount of money improving the reliability of a 1-version program.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-    {
-      id: 'id',
-      name: 'Quiz for 5/13',
-      questions: [
-        {
-          title: 'Agree or disagree: White-box testing is typically more cost-effective than black-box testing for testing the security of applications like my.ucla.edu.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
+          responses: [
+            {
+              user: {
+                firstName: 'Yifei',
+                lastName: 'Fu',
+                uid: '5930492943',
+                email: 'yf@g.com',
+                username: 'yifei',
+                role: 'student',
+              },
+              value: 'I do not know',
+            },
+            {
+              user: {
+                firstName: 'Keshav',
+                lastName: 'Tadimeti',
+                uid: '104572783',
+                email: 'ktadimeti@ucla.edu',
+                username: 'ktadimeti',
+                role: 'student',
+              },
+              value: 'Agree',
+            },
           ],
         },
         {
           title: 'Please justify: For software reliability in an application like onboard communication and life-support software for the Deep Space Transport, N-version programming is overall more cost-effective than spending the same amount of money improving the reliability of a 1-version program.',
           text: '',
           responseType: 'string',
+          responses: [
+            {
+              user: {
+                firstName: 'Yifei',
+                lastName: 'Fu',
+                uid: '5930492943',
+                email: 'yf@g.com',
+                username: 'yifei',
+                role: 'student',
+              },
+              value: 'In order to improve software reliability, N-version programming is more ...',
+            },
+            {
+              user: {
+                firstName: 'Keshav',
+                lastName: 'Tadimeti',
+                uid: '104572783',
+                email: 'ktadimeti@ucla.edu',
+                username: 'ktadimeti',
+                role: 'student',
+              },
+              value: 'To begin with, both N-version and 1-version programming have been proven to be reliable measure to reduce ...',
+            },
+          ],
         },
         {
           title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
           text: '',
           responseType: 'string',
+          responses: [
+            {
+              user: {
+                firstName: 'Yifei',
+                lastName: 'Fu',
+                uid: '5930492943',
+                email: 'yf@g.com',
+                username: 'yifei',
+                role: 'student',
+              },
+              value: 'Formal methods are defined as...',
+            },
+            {
+              user: {
+                firstName: 'Keshav',
+                lastName: 'Tadimeti',
+                uid: '104572783',
+                email: 'ktadimeti@ucla.edu',
+                username: 'ktadimeti',
+                role: 'student',
+              },
+              value: 'Critical applications with the responsibilities...',
+            },
+          ],
         },
       ],
       startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri May 15 2019 21:15:15 GMT-0700 (Pacific Daylight Time)',
       openToRoles: [
         'TA',
         'student',
@@ -559,9 +354,8 @@ export const sampleCourseDetails: CourseDetails = {
       ],
       secret: 'pass',
     },
-
     {
-      id: 'id',
+      id: '2',
       name: 'Quiz for 5/8',
       questions: [
         {
@@ -586,7 +380,7 @@ export const sampleCourseDetails: CourseDetails = {
         },
       ],
       startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri May 15 2019 21:10:05 GMT-0700 (Pacific Daylight Time)',
       openToRoles: [
         'TA',
         'student',
@@ -599,198 +393,7 @@ export const sampleCourseDetails: CourseDetails = {
     },
 
     {
-      id: 'id',
-      name: 'Quiz for 5/6',
-      questions: [
-        {
-          title: 'Agree or disagree: White-box testing is typically more cost-effective than black-box testing for testing the security of applications like my.ucla.edu.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: For software reliability in an application like onboard communication and life-support software for the Deep Space Transport, N-version programming is overall more cost-effective than spending the same amount of money improving the reliability of a 1-version program.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-    {
-      id: 'id',
-      name: 'Quiz for 5/22',
-      questions: [
-        {
-          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-    {
-      id: 'id',
-      name: 'Quiz for 5/20',
-      questions: [
-        {
-          title: 'Agree or disagree: White-box testing is typically more cost-effective than black-box testing for testing the security of applications like my.ucla.edu.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: For software reliability in an application like onboard communication and life-support software for the Deep Space Transport, N-version programming is overall more cost-effective than spending the same amount of money improving the reliability of a 1-version program.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-    {
-      id: 'id',
-      name: 'Quiz for 5/29',
-      questions: [
-        {
-          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-    {
-      id: 'id',
-      name: 'Quiz for 5/27',
-      questions: [
-        {
-          title: 'Agree or disagree: White-box testing is typically more cost-effective than black-box testing for testing the security of applications like my.ucla.edu.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: For software reliability in an application like onboard communication and life-support software for the Deep Space Transport, N-version programming is overall more cost-effective than spending the same amount of money improving the reliability of a 1-version program.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri May 15 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri May 15 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-
-    {
-      id: 'id',
+      id: '3',
       name: 'Quiz for 6/8',
       questions: [
         {
@@ -815,7 +418,7 @@ export const sampleCourseDetails: CourseDetails = {
         },
       ],
       startTime: 'Fri June 8 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri June 8 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri June 8 2019 21:20:05 GMT-0700 (Pacific Daylight Time)',
       openToRoles: [
         'TA',
         'student',
@@ -826,161 +429,8 @@ export const sampleCourseDetails: CourseDetails = {
       ],
       secret: 'pass',
     },
-
     {
-      id: 'id',
-      name: 'Quiz for 6/10',
-      questions: [
-        {
-          title: 'Agree or disagree: Developers should strongly prefer inheritance to delegation.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri June 8 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri June 8 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-    {
-      id: 'id',
-      name: 'Quiz for 6/12',
-      questions: [
-        {
-          title: 'Agree or disagree: Developers should strongly prefer inheritance to delegation.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri June 8 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri June 8 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-    {
-      id: 'id',
-      name: 'Quiz for 6/15',
-      questions: [
-        {
-          title: 'Agree or disagree: Developers should strongly prefer inheritance to delegation.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: Experienced-based cost modeling is typically a better choice than algorithmic cost modeling when developing factory-floor software applications for a high-tech manufacturing firm like SpaceX.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri June 8 2019 21:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri June 8 2019 21:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-    {
-      id: 'id',
-      name: 'Quiz for 6/17',
-      questions: [
-        {
-          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri June 7 2019 15:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri June 7 2019 15:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-    {
-      id: 'id',
+      id: '4',
       name: 'Quiz for 6/7',
       questions: [
         {
@@ -1004,8 +454,8 @@ export const sampleCourseDetails: CourseDetails = {
           responseType: 'string',
         },
       ],
-      startTime: 'Fri June 7 2019 15:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri June 7 2019 15:00:05 GMT-0700 (Pacific Daylight Time)',
+      startTime: 'Fri June 7 2019 09:00:00 GMT-0700 (Pacific Daylight Time)',
+      endTime: 'Fri June 7 2019 18:00:05 GMT-0700 (Pacific Daylight Time)',
       openToRoles: [
         'TA',
         'student',
@@ -1016,129 +466,30 @@ export const sampleCourseDetails: CourseDetails = {
       ],
       secret: 'pass',
     },
-
-    {
-      id: 'id',
-      name: 'Quiz for 6/7',
-      questions: [
-        {
-          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri June 7 2019 15:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri June 7 2019 15:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-    {
-      id: 'id',
-      name: 'Quiz for 6/7',
-      questions: [
-        {
-          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri June 7 2019 15:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri June 7 2019 15:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
-    {
-      id: 'id',
-      name: 'Quiz for 6/7',
-      questions: [
-        {
-          title: 'Agree or disagree: A native application is typically more trouble to design and maintain than an equivalent web application.',
-          text: '',
-          responseType: 'choices',
-          responseChoices: [
-            'Agree',
-            'Disagree',
-            'I do not know',
-          ],
-        },
-        {
-          title: 'Please justify: Formal methods are typically practical only for safety-critical applications, or for applications with an enormous number of users.',
-          text: '',
-          responseType: 'string',
-        },
-        {
-          title: 'Please justify: A project team in this course should have a single technical leader who manages the project.',
-          text: '',
-          responseType: 'string',
-        },
-      ],
-      startTime: 'Fri June 7 2019 15:00:00 GMT-0700 (Pacific Daylight Time)',
-      endTime: 'Fri June 7 2019 15:00:05 GMT-0700 (Pacific Daylight Time)',
-      openToRoles: [
-        'TA',
-        'student',
-      ],
-      resultVisibleToRoles: [
-        'TA',
-        'student',
-      ],
-      secret: 'pass',
-    },
-
   ],
   enrolledUsers: [
     {
+      firstName: 'Paul',
+      lastName: 'Eggert',
+      uid: '',
+      email: 'eggert@ucla.com',
+      username: 'eggert',
+      role: 'instructor',
+    },
+    {
       firstName: 'Yifei',
       lastName: 'Fu',
-      uid: '5930492943',
+      uid: '123456789',
       email: 'yf@g.com',
-      username: 'xiazz',
+      username: 'yifei',
+      role: 'student',
+    },
+    {
+      firstName: 'Keshav',
+      lastName: 'Tadimeti',
+      uid: '104572783',
+      email: 'ktadimeti@ucla.edu',
+      username: 'ktadimeti',
       role: 'student',
     },
   ],
