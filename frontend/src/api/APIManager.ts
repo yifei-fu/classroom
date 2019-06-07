@@ -11,20 +11,15 @@ import {
 } from './type';
 
 export default class APIManager {
-    public static createCourse(body: CreateCourseRequestBody): Promise<Course> {
+    public static createCourse(body: CreateCourseRequestBody): Promise<Response> {
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `jwt ${Auth.getToken()}`,
+            'token': `${Auth.getToken()}`,
         };
         return fetch(`${API_HOST}/course`, {
             method: 'POST',
             headers,
             body: JSON.stringify(body),
-        }).then((response) => {
-            if (response.ok) {
-                return response.json() as Promise<Course>;
-            }
-            throw new Error('Failed to create a new course');
         });
     }
 
@@ -71,7 +66,7 @@ export default class APIManager {
     public static getEnrolledCourses(): Promise<Course[]> {
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `jwt ${Auth.getToken()}`,
+            'token': `${Auth.getToken()}`,
             'mode': 'no-cors',
         };
         return fetch(`${API_HOST}/courses`, {
@@ -88,7 +83,7 @@ export default class APIManager {
     public static getCourseUsers(id: string): Promise<CourseUsers> {
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `jwt ${Auth.getToken()}`,
+            'token': `${Auth.getToken()}`,
         };
         return fetch(`${API_HOST}/course/${id}/users`, {
             method: 'GET',
@@ -104,7 +99,7 @@ export default class APIManager {
     public static enrollCourse(id: string, body: EnrollCourseRequestBody): Promise<void> {
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `jwt ${Auth.getToken()}`,
+            'token': `${Auth.getToken()}`,
         };
         return fetch(`${API_HOST}/course/${id}/enroll`, {
             method: 'PUT',
@@ -121,7 +116,7 @@ export default class APIManager {
     public static createPost(courseID: string, body: CreatePostRequestBody): Promise<void> {
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `jwt ${Auth.getToken()}`,
+            'token': `${Auth.getToken()}`,
         };
         return fetch(`${API_HOST}/course/${courseID}/post`, {
             method: 'POST',
@@ -138,7 +133,7 @@ export default class APIManager {
     public static createComment(courseID: string, postID: string, body: CreateCommentRequestBody): Promise<void> {
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `jwt ${Auth.getToken()}`,
+            'token': `${Auth.getToken()}`,
         };
         return fetch(`${API_HOST}/course/${courseID}/post/${postID}/comment`, {
             method: 'POST',

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import {API_HOST, LOCAL_TOKEN_KEY} from './constant';
-import { UserSignUpRequestBody } from './type';
+import {UserSignInRequestBody, UserSignUpRequestBody} from './type';
 
 export default class Auth {
     public static isSignedIn(): boolean {
@@ -32,13 +32,13 @@ export default class Auth {
         return token;
     }
 
-    public static login(username: string, password: string) {
+    public static signIn(user: UserSignInRequestBody) {
         return fetch(`${API_HOST}/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify(user),
         }).then((response) => {
             if (response.ok) {
                 return response.json();
