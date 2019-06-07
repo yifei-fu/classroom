@@ -1,7 +1,10 @@
-import {Column} from 'typeorm';
+import {Column, ObjectIdColumn, ObjectID, Entity} from 'typeorm';
 
+@Entity()
 export class Question {
-    
+    @ObjectIdColumn()
+    public id: ObjectID;
+
     @Column()
     public title: string;
 
@@ -12,5 +15,6 @@ export class Question {
     public responseType: string;
 
     @Column()
-    public responseChoices: string;
+    public responseChoices: string[];
 }
+
