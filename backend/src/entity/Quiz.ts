@@ -7,11 +7,14 @@ export class Quiz {
     @ObjectIdColumn()
     public id: ObjectID;
 
+    @ObjectIdColumn()
+    public courseID: ObjectID;
+
     @Column()
     public name: string;
 
-    @Column((type) => Question)
-    public questions: Question[];
+    @Column()
+    public questions: ObjectID[];
 
     @Column()
     public startTime: string;

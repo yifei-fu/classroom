@@ -45,9 +45,8 @@ export class UserController {
     public static async createUser(req, res) {
         const {username, firstName, lastName, email, password, isInstructor, uid} = req.body
 
-        if (!username || !firstName || !lastName || !email || !password || !isInstructor || !uid) {
-            res.status(400).send('Missing information');
-            return;
+        if (!username || !firstName || !lastName || !email || !password || !uid) {
+            return res.status(400).send('Missing information');
         }
 
         // Check whether user exists
@@ -66,7 +65,7 @@ export class UserController {
                     console.log('Instructor detected')
                     instructorBool = true;
                 } else {
-                    res.status(400).send('isInstructor param has unknown value');
+                    return res.status(400).send('isInstructor param has unknown value');
                 }
 
                 const newUser = {
@@ -86,7 +85,7 @@ export class UserController {
 
                 /* When user is created, a user profile should be created as well*/
                 UserProfileController.createUserProfile(newUser).then((r)=>{
-                    console.log(r.result)
+                    console.log(r.ops)
                     // Return jwt token
                     const payload = {
                         uid: newUser.uid,
