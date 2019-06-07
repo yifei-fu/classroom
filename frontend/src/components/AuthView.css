@@ -12,5 +12,7 @@
   flex-direction: column;
   height: 100%;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  border-radius: 20px;
+  margin: 20px;
 }
