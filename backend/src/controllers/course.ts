@@ -70,6 +70,20 @@ export class CourseController {
             res.send(400, 'Missing information')
         }
 
+        const token: string = req.body.token || req.headers['token'] || req.headers['x-access-token'];
+        if (!token) {
+            return res.status(400).send('Auth token missing')
+        }
+
+        const user = await authentication.AuthController.VerifyToken(token)
+        if (!user) {
+            return res.send(400, 'Invalid auth token')
+        }
+
+        if (!user.isInstructor) {
+            return res.send(403, 'User is not an instructor')
+        }
+
         let studentJoinSecret = ""
         let TAJoinSecret = ""
         for (var i=0; i < 3; i++) {
@@ -80,24 +94,24 @@ export class CourseController {
         console.log('studentJoinSecret is', studentJoinSecret)
         console.log('TAJoinSecret is', TAJoinSecret)
 
+        const profile = await getMongoManager().findOne(UserProfile, {uid: user.uid})
         const course = {
             name,
             school,
             term,
             studentJoinSecret,
             TAJoinSecret,
-            instructors: new Array(),
-            enrolledUsers: new Array(),
+            instructors: [profile],
+            enrolledUsers: [profile],
         };
 
         try {
             const result = await getMongoManager().insertOne(Course, course)
-            console.log(result.insertedId)
+            console.log(result.ops[0])
+            return res.json(result.ops[0])
         } catch(err) {
             console.log(err)
         }
-
-        res.status(200).send('Course created successfully')
     }
 
     public static async enrollCourse(req, res) {
@@ -171,6 +185,12 @@ export class CourseController {
                 console.log(err)
                 res.status(400).send(err)
             });
+
+            const s3 = await getMongoManager()
+            .findOneAndUpdate(
+                Course,
+                {_id: course.id},
+                {$push: {enrolledUsers: TAProfile}})
     
             return res.status(200).send("Instructor added successfully.")
 
@@ -204,11 +224,16 @@ export class CourseController {
                 res.status(400).send(err)
             });
     
+            const profile = await getMongoManager()
+            .findOne(UserProfile, {uid: user.uid});
+
+            console.log("TAProfile:", profile)
+
             const s2 = await getMongoManager()
             .findOneAndUpdate(
                 Course,
                 {_id: course.id},
-                {$push: {enrolledUsers: user.id}})
+                {$push: {enrolledUsers: profile}})
             .catch(err => {
                 console.log(err)
                 res.status(400).send(err)
