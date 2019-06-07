@@ -1,5 +1,6 @@
 import {Column, Entity, ObjectID, ObjectIdColumn, PrimaryGeneratedColumn} from 'typeorm';
-import { UserProfile } from './UserProfile';
+import {UserProfile} from './UserProfile';
+import {Quiz} from './Quiz';
 
 @Entity()
 export class Course {
@@ -16,15 +17,15 @@ export class Course {
     @Column()
     public term: string;
 
-    @Column((type) => UserProfile)
-    public instructors: UserProfile[];
-
     @Column()
     public studentJoinSecret: string;
 
     @Column()
     public TAJoinSecret: string;
-
+    
     @Column((type) => UserProfile)
     public enrolledUsers: UserProfile[];
+
+    @Column((type) => UserProfile)
+    public instructors: UserProfile[];
 }
