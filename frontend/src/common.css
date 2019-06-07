@@ -38,3 +38,12 @@
 .post-comment-text {
     text-align: left;
 }
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100px;
+    width: min-content;
+    min-width: 160px;
+}
