@@ -82,11 +82,6 @@ const SingleQuizModal: React.FC<Props> = (props: Props) => {
             Submit
           </Button>
         }
-        {
-          time === 'past' && (
-            <h5 className='text-center font-weight-normal mb-3'>Results</h5>
-          )
-        }
       </Modal.Body>
     </Modal>
   );

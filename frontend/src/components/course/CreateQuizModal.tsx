@@ -17,11 +17,11 @@ export interface Props {
 }
 
 const CreateQuizModal: React.FC<Props> = (props: Props) => {
-  //const [formData, setFormData] = useState<CreateQuizRequestBody>({title: '', content: '', title1: '', content1: '', answer1: '', title2: '', content2: '', answer2: '', title3: '', content3: '', answer3: '', tags: []});
-  const [formData, setFormData] = useState<CreateQuizRequestBody>({title: '', content: '', tags: [], answer: ''});
+  const [formData, setFormData] = useState<CreateQuizRequestBody>({title: '', content: '', answer: '', title1: '', content1: '', answer1: '', title2: '', content2: '', answer2: '', title3: '', content3: '', answer3: '', tags: []});
+  //const [formData, setFormData] = useState<CreateQuizRequestBody>({title: '', content: '', tags: [], answer: '', title1: ''});
   const {courseID, open, setOpen} = props;
 
-  const handleChange = (field: 'title' | 'content' | 'answer') => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (field: 'title1' | 'content1' | 'answer1' | 'title2' | 'content2' | 'answer2' | 'title3' | 'content3' | 'answer3') => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = event.target.value;
     setFormData((prevState: CreateQuizRequestBody) => ({...prevState, [field]: value}));
   };
@@ -63,8 +63,8 @@ const CreateQuizModal: React.FC<Props> = (props: Props) => {
                   id='post-title'
                   aria-describedby='title'
                   placeholder='Title for question 1'
-                  value={formData.title}
-                  onChange={handleChange('title')}
+                  value={formData.title1}
+                  onChange={handleChange('title1')}
                 />
               </Col>
             </Row>
@@ -77,8 +77,8 @@ const CreateQuizModal: React.FC<Props> = (props: Props) => {
                   id='post-content'
                   aria-describedby='content'
                   placeholder='Question for question 1'
-                  value={formData.content}
-                  onChange={handleChange('content')}
+                  value={formData.content1}
+                  onChange={handleChange('content1')}
                 />
               </Col>
             </Row>
@@ -91,8 +91,8 @@ const CreateQuizModal: React.FC<Props> = (props: Props) => {
                   id='post-answer'
                   aria-describedby='answer'
                   placeholder='Answer for question 1'
-                  value={formData.answer}
-                  onChange={handleChange('answer')}
+                  value={formData.answer1}
+                  onChange={handleChange('answer1')}
                 />
               </Col>
             </Row>
@@ -112,8 +112,8 @@ const CreateQuizModal: React.FC<Props> = (props: Props) => {
                 id='post-title'
                 aria-describedby='title'
                 placeholder='Title for question 2'
-                value={formData.title}
-                onChange={handleChange('title')}
+                value={formData.title2}
+                onChange={handleChange('title2')}
               />
             </Col>
             </Row>
@@ -126,8 +126,8 @@ const CreateQuizModal: React.FC<Props> = (props: Props) => {
                 id='post-content'
                 aria-describedby='content'
                 placeholder='Question for question 2'
-                value={formData.content}
-                onChange={handleChange('content')}
+                value={formData.content2}
+                onChange={handleChange('content2')}
               />
             </Col>
           </Row>
@@ -140,8 +140,8 @@ const CreateQuizModal: React.FC<Props> = (props: Props) => {
                 id='post-answer'
                 aria-describedby='answer'
                 placeholder='Answer for question 2'
-                value={formData.answer}
-                onChange={handleChange('answer')}
+                value={formData.answer2}
+                onChange={handleChange('answer2')}
               />
             </Col>
           </Row>
@@ -158,8 +158,8 @@ const CreateQuizModal: React.FC<Props> = (props: Props) => {
                 id='post-title'
                 aria-describedby='title'
                 placeholder='Title for question 3'
-                value={formData.title}
-                onChange={handleChange('title')}
+                value={formData.title3}
+                onChange={handleChange('title3')}
               />
             </Col>
             </Row>
@@ -172,8 +172,8 @@ const CreateQuizModal: React.FC<Props> = (props: Props) => {
                 id='post-content'
                 aria-describedby='content'
                 placeholder='Question for question 3'
-                value={formData.content}
-                onChange={handleChange('content')}
+                value={formData.content3}
+                onChange={handleChange('content3')}
               />
             </Col>
           </Row>
@@ -186,8 +186,8 @@ const CreateQuizModal: React.FC<Props> = (props: Props) => {
                 id='post-answer'
                 aria-describedby='answer'
                 placeholder='Answer for question 3'
-                value={formData.answer}
-                onChange={handleChange('answer')}
+                value={formData.answer3}
+                onChange={handleChange('answer3')}
               />
             </Col>
           </Row>

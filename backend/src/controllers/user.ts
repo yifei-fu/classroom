@@ -43,6 +43,7 @@ export class UserController {
     }
 
     public static async createUser(req, res) {
+        console.log(req.body)
         const {username, firstName, lastName, email, password, isInstructor, uid} = req.body
 
         if (!username || !firstName || !lastName || !email || !password || !uid) {
