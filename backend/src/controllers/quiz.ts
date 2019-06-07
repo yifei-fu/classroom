@@ -33,15 +33,15 @@ export class QuizController {
                         let newQuestions: Question[];
                         questions.forEach(question=> {
                                 
-                            const newQuestion: Question = getMongoManager().create(Question, {
+                            const newQuestion: Question = {
                                 title: question.title,
                                 text: question.text,
                                 responseType: question.responseType,
                                 responseChoices: question.responseChoices
-                            });
+                            };
                             newQuestions.push(newQuestion)
                         });
-                        
+
                         const newQuiz: Quiz = getMongoManager().create(Quiz, {
                             name,
                             startTime,
